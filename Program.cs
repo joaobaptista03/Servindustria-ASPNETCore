@@ -11,6 +11,20 @@ builder.Services.AddDbContext<ServindustriaDBContext>(opt => opt.UseSqlServer(bu
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+builder.Services.AddAuthentication("AuthCookies")
+    .AddCookie("AuthCookies", options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.SlidingExpiration = true;
+    });
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 Log.Logger = new LoggerConfiguration()
     .Enrich
     .FromLogContext()

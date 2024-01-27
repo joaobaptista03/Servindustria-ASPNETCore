@@ -26,9 +26,17 @@
                 <li class="@(currentPage.EndsWith("/contacto") ? "currentPage" : "")">
                     <a asp-page="Contact">Contacto</a>
                 </li>
-                <li class="@(currentPage.EndsWith("/loginRegister") ? "currentPage" : "")">
-                    <a asp-page="LoginRegister">Login / Register</a>
-                </li>
+                @if (User.Identity != null && User.Identity.IsAuthenticated) {
+                    <li>
+                        <form id="logoutForm" method="post" asp-page="/LoginRegister" asp-page-handler="Logout">
+                            <a href="#" id="logout-button">Logout</a>
+                        </form>
+                    </li>
+                } else {
+                    <li class="@(currentPage.EndsWith("/loginRegister") ? "currentPage" : "")">
+                        <a asp-page="LoginRegister">Login / Register</a>
+                    </li>
+                }
             </ul>
         </header>
 

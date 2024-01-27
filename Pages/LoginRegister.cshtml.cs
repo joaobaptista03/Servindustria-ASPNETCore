@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using System.Threading.Tasks;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 
 public class LoginRegisterModel : PageModel {
     private readonly IUserRepository _repository;
@@ -30,6 +33,7 @@ public class LoginRegisterModel : PageModel {
         if (loginEmail == null || loginPassword == null) return new JsonResult(new {success = false, error = "Unknown Error"});
 
         if (await _repository.LoginAsync(loginEmail, loginPassword)) {
+            AddCookies(loginEmail);
             return new JsonResult(new {success = true});
         } else {
             return new JsonResult(new {success = false, error = "Invalid credentials"});
@@ -56,10 +60,11 @@ public class LoginRegisterModel : PageModel {
 
         _repository.AddUser(NewUser);
 
+        AddCookies(NewUser.Email);
         return new JsonResult(new {success = true});        
     }
 
-    bool IsValidEmail(string email) {
+    private bool IsValidEmail(string email) {
         if (string.IsNullOrWhiteSpace(email)) return false;
 
         try {
@@ -83,5 +88,21 @@ public class LoginRegisterModel : PageModel {
         } catch (RegexMatchTimeoutException) {
             return false;
         }
+    }
+
+    public void AddCookies(string email) {
+        bool isAdmin = _repository.IsAdmin(email);
+
+        var Claims = new List<Claim> {
+            new Claim(ClaimTypes.Name, email),
+            new Claim(ClaimTypes.Role, isAdmin ? "Admin" : "User")
+        };
+
+        HttpContext.SignInAsync("AuthCookies", new ClaimsPrincipal(new ClaimsIdentity(Claims, "AuthCookies")));
+    }
+
+    public async Task<IActionResult> OnPostLogout() {
+        await HttpContext.SignOutAsync("AuthCookies");
+        return RedirectToPage("/");
     }
 }

@@ -29,4 +29,12 @@ public class UserRepository : IUserRepository {
         await _context.Users.AddAsync(user);
         await _context.SaveChangesAsync();
     }
+
+    public bool IsAdmin(string email) {
+        var user = _context.Users.FirstOrDefault(u => u.Email == email);
+        if (user == null) return false;
+        return user.IsAdmin;
+    }
+
+    
 }
