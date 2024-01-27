@@ -1,0 +1,11 @@
+.logo {
+    display: grid;
+    place-items: center;
+    height: 76vh;
+}
+
+.logo img {
+    width: 500px;
+    border: 5px solid black;
+    border-radius: 50%;
+}

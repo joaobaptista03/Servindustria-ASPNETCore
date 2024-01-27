@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+@{ 
+    string currentPage = String.Empty;
+    if (Context != null && Context.Request != null && Context.Request.Path != null)
+        { currentPage = Context.Request.Path; }
+}
+
+<html>
+    <head>
+        <title>Servindustria</title>
+        <link rel="stylesheet" href="~/css/main.css" asp-append-version="true">
+        <link rel="shortcut icon" type="image/x-icon" href="~/imgs/favicon.png">
+    </head>
+
+    <body>
+        <header>
+            <p>Servindustria</p>
+            <ul>
+                <li class="@(currentPage.EndsWith("/") ? "currentPage" : "")">
+                    <a asp-page="Index">Página Inicial</a>
+                </li>
+                <li class="@(currentPage.EndsWith("/sobre") ? "currentPage" : "")">
+                    <a asp-page="About">Sobre</a>
+                </li>
+                <li class="@(currentPage.EndsWith("/contacto") ? "currentPage" : "")">
+                    <a asp-page="Contact">Contacto</a>
+                </li>
+                <li class="@(currentPage.EndsWith("/login") ? "currentPage" : "")">
+                    <a asp-page="Login">Login</a>
+                </li>
+            </ul>
+        </header>
+
+        <main>
+            @RenderBody()
+        </main>
+
+        <footer>
+            <p>
+                &copy; 2024 - Servindustria
+            </p>
+        </footer>
+
+        @RenderSection("Scripts", required: false)
+    </body>
+</html>
