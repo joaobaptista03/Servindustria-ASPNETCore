@@ -18,11 +18,6 @@ main {
 
 header {
     background-color: #298CAC;
-    text-align: center;
-}
-
-header p /* SERVINDUSTRIA */ {
-    font-size: 1.5rem;
 }
 
 header ul /* MENU */ {
@@ -32,18 +27,20 @@ header ul /* MENU */ {
     align-items: center;
 }
 
-header li a /* EACH MENU OPTION */ {
+header ul li a /* EACH MENU OPTION */ {
     text-decoration: none;
     color: white;
+    transition: all 0.2s ease;
 }
 
-header li a:hover /* EACH MENU OPTION */ {
-    color: black;
-    transition: color 0.4s ease;
+header ul li a:hover /* HOVER OF EACH MENU OPTION */ {
+    transition: all 0.2s ease;
+    box-shadow: 0px 2px 0px;
+    padding: 5px 10px;
 }
 
 .currentPage a /* CURRENT PAGE */ {
-    color: rgb(184, 0, 0);
+    color: black;
 }
 
 /* -------------------------------------------- FOOTER -------------------------------------------- */
@@ -51,5 +48,7 @@ header li a:hover /* EACH MENU OPTION */ {
 footer {
     background-color: #298CAC;
     display: flex;
+    align-items: center;
     justify-content: center;
+    list-style-type: none;
 }

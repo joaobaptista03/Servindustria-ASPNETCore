@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 
-public class LoginRegisterModel : PageModel {
+public class AuthenticationModel : PageModel {
     private readonly IUserRepository _repository;
 
     /* REGISTER */
@@ -25,7 +25,7 @@ public class LoginRegisterModel : PageModel {
     [BindProperty]
     public string? loginPassword { get; set; }
 
-    public LoginRegisterModel(IUserRepository repository) {
+    public AuthenticationModel(IUserRepository repository) {
         _repository = repository;
     }
 

@@ -15,7 +15,6 @@
 
     <body>
         <header>
-            <p>Servindustria</p>
             <ul>
                 <li class="@(currentPage.EndsWith("/") ? "currentPage" : "")">
                     <a asp-page="Index">Página Inicial</a>
@@ -28,14 +27,14 @@
                 </li>
                 @if (User.Identity != null && User.Identity.IsAuthenticated) {
                     <li>
-                        <form id="logoutForm" method="post" asp-page="/LoginRegister" asp-page-handler="Logout">
+                        <form id="logoutForm" method="post" asp-page="/Authentication" asp-page-handler="Logout">
                             <a href="#" id="logout-button">Logout</a>
                         </form>
                     </li>
                     <script src="~/js/logout.js" asp-append-version="true"></script>
                 } else {
-                    <li class="@(currentPage.EndsWith("/loginRegister") ? "currentPage" : "")">
-                        <a asp-page="LoginRegister">Login / Register</a>
+                    <li class="@(currentPage.EndsWith("/authentication") ? "currentPage" : "")">
+                        <a asp-page="Authentication">Login / Registar</a>
                     </li>
                 }
             </ul>
