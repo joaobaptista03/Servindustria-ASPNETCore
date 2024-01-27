@@ -10,42 +10,46 @@ html, body {
 
 main {
     flex: 1;
+    opacity: 0;
+    transition: 1s ease;
 }
 
 /* -------------------------------------------- HEADER -------------------------------------------- */
 
-header p /* SERVINDUSTRIA */ {
+header {
+    background-color: #298CAC;
     text-align: center;
-    font-size: 2em;
-    background-color: black;
-    color: white;
-    padding: 20px;
-    margin: 0px;
+}
+
+header p /* SERVINDUSTRIA */ {
+    font-size: 1.5rem;
 }
 
 header ul /* MENU */ {
     display: flex;
     list-style-type: none;
-    padding: 0;
-    margin: 2%;
     justify-content: space-around;
-    align-items: center ;
+    align-items: center;
 }
 
 header li a /* EACH MENU OPTION */ {
     text-decoration: none;
+    color: white;
+}
+
+header li a:hover /* EACH MENU OPTION */ {
     color: black;
+    transition: color 0.4s ease;
 }
 
 .currentPage a /* CURRENT PAGE */ {
-    color: red;
+    color: rgb(184, 0, 0);
 }
 
 /* -------------------------------------------- FOOTER -------------------------------------------- */
 
 footer {
-    background-color: black;
-    color: white;
+    background-color: #298CAC;
     display: flex;
     justify-content: center;
 }

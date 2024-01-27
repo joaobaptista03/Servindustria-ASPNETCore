@@ -26,8 +26,8 @@
                 <li class="@(currentPage.EndsWith("/contacto") ? "currentPage" : "")">
                     <a asp-page="Contact">Contacto</a>
                 </li>
-                <li class="@(currentPage.EndsWith("/login") ? "currentPage" : "")">
-                    <a asp-page="Login">Login</a>
+                <li class="@(currentPage.EndsWith("/loginRegister") ? "currentPage" : "")">
+                    <a asp-page="LoginRegister">Login / Register</a>
                 </li>
             </ul>
         </header>
@@ -42,6 +42,7 @@
             </p>
         </footer>
 
+        <script src="~/js/main.js" asp-append-version="true"></script>
         @RenderSection("Scripts", required: false)
     </body>
 </html>

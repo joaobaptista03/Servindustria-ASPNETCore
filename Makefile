@@ -3,4 +3,4 @@ all:
 
 clean:
 	dotnet clean
-	rm -rf bin/ obj/ Servindustria.sln
+	rm -rf bin/ obj/ logs/ Servindustria.sln

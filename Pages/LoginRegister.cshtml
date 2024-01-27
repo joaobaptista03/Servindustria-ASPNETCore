@@ -1,0 +1,34 @@
+@page "/loginRegister"
+@model LoginRegisterModel
+
+<div id="login-error" style="color:red; text-align: center; padding:10px; display: none;"></div>
+<div id="login-success" style="color:green; text-align:center; padding:10px; display: none;"></div>
+<form id="login-form" method="post" asp-page="/LoginRegister" asp-page-handler="Login">
+    @Html.AntiForgeryToken()
+    <input type="text" name="loginEmail" placeholder="Email" />
+    <input type="password" name="loginPassword" placeholder="Password" />
+    
+    <button type="submit">Login</button>
+</form>
+
+<div id="register-error" style="color:red; text-align: center; padding:10px; display: none;"></div>
+<div id="register-success" style="color:green; text-align:center; padding:10px; display: none;"></div>
+<form id="register-form" method="post" asp-page="/LoginRegister" asp-page-handler="Register">
+    @Html.AntiForgeryToken()
+    <input type="text" name="Name" placeholder="Nome" required/>
+    <input type="text" name="Company" placeholder="Empresa"/>
+    <input type="text" name="Address" placeholder="Morada"/>
+    <input type="number" name="Nif" placeholder="NIF"/>
+    <input type="number" name="Phone" placeholder="Telefone / Telemóvel"/>
+    <input type="text" name="Email" placeholder="Email" required/>
+    <input type="password" name="Password" placeholder="Password" required/>
+    <input type="password" name="ConfirmPassword" placeholder="Confirmação da Password" required/>
+    
+    <button type="submit">Register</button>
+</form>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/js/loginRegister.js"></script>
+}
