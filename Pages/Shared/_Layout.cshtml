@@ -32,6 +32,7 @@
                             <a href="#" id="logout-button">Logout</a>
                         </form>
                     </li>
+                    <script src="~/js/logout.js" asp-append-version="true"></script>
                 } else {
                     <li class="@(currentPage.EndsWith("/loginRegister") ? "currentPage" : "")">
                         <a asp-page="LoginRegister">Login / Register</a>

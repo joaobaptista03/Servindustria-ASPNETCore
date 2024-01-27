@@ -33,7 +33,12 @@ public class LoginRegisterModel : PageModel {
         if (loginEmail == null || loginPassword == null) return new JsonResult(new {success = false, error = "Unknown Error"});
 
         if (await _repository.LoginAsync(loginEmail, loginPassword)) {
-            AddCookies(loginEmail);
+            var Claims = new List<Claim> {
+                        new Claim(ClaimTypes.Name, loginEmail),
+                        new Claim(ClaimTypes.Role, await _repository.IsAdmin(loginEmail) ? "Admin" : "User")
+                    };
+            await HttpContext.SignInAsync("AuthCookies", new ClaimsPrincipal(new ClaimsIdentity(Claims, "AuthCookies")));
+        
             return new JsonResult(new {success = true});
         } else {
             return new JsonResult(new {success = false, error = "Invalid credentials"});
@@ -55,12 +60,16 @@ public class LoginRegisterModel : PageModel {
 
         var modelErrors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
         if (modelErrors.Count > 0) return new JsonResult(new {success = false, errors = modelErrors});
+
+        var Claims = new List<Claim> {
+            new Claim(ClaimTypes.Name, NewUser.Email),
+            new Claim(ClaimTypes.Role, await _repository.IsAdmin(NewUser.Email) ? "Admin" : "User")
+        };
+        await HttpContext.SignInAsync("AuthCookies", new ClaimsPrincipal(new ClaimsIdentity(Claims, "AuthCookies")));
         
         NewUser.Password = BCrypt.Net.BCrypt.HashPassword(NewUser.Password);
 
-        _repository.AddUser(NewUser);
-
-        AddCookies(NewUser.Email);
+        await _repository.AddUserAsync(NewUser);
         return new JsonResult(new {success = true});        
     }
 
@@ -89,20 +98,8 @@ public class LoginRegisterModel : PageModel {
             return false;
         }
     }
-
-    public void AddCookies(string email) {
-        bool isAdmin = _repository.IsAdmin(email);
-
-        var Claims = new List<Claim> {
-            new Claim(ClaimTypes.Name, email),
-            new Claim(ClaimTypes.Role, isAdmin ? "Admin" : "User")
-        };
-
-        HttpContext.SignInAsync("AuthCookies", new ClaimsPrincipal(new ClaimsIdentity(Claims, "AuthCookies")));
-    }
-
     public async Task<IActionResult> OnPostLogout() {
         await HttpContext.SignOutAsync("AuthCookies");
-        return RedirectToPage("/");
+        return RedirectToPage("/Index");
     }
 }

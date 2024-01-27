@@ -9,5 +9,5 @@ public class User {
     public int Phone { get; set; }
     public string Email { get; set; } = String.Empty;
     public string Password { get; set; } = String.Empty;
-    public bool IsAdmin { get; set; }
+    public bool IsAdmin { get; set; } = false;
 }

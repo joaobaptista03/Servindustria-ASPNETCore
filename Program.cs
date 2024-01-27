@@ -36,11 +36,11 @@ builder.Logging.AddSerilog();
 
 var app = builder.Build();
 
-app.Services.CreateScope()
-    .ServiceProvider
-    .GetRequiredService<ServindustriaDBContext>()
-    .Database
-    .EnsureCreated();
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ServindustriaDBContext>();
+    context.Database.EnsureCreated();
+}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

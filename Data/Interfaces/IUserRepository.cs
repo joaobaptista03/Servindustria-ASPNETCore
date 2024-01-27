@@ -5,6 +5,6 @@ public interface IUserRepository {
     Task<bool> LoginAsync(string email, string password);
     Task<bool> EmailExistsAsync(string email);
     Task<bool> NifExistsAsync(int nif);
-    void AddUser(User user);
-    bool IsAdmin(string email);
+    Task AddUserAsync(User user);
+    Task<bool> IsAdmin(string email);
 }
