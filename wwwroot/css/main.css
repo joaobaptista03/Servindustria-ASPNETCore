@@ -91,30 +91,30 @@ footer {
 
 /* -------------------------------------------- MAIN STYLES -------------------------------------------- */
 
-.formClass {
+form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.formClass input {
+form input {
     margin: 5px;
     padding: 5px;
     border: 1px solid #298CAC;
     border-radius: 5px;
 }
 
-.formClass input:focus {
+form input:focus {
     outline: none;
     border: 1px solid #298CAC;
     box-shadow: 0px 0px 5px #298CAC
 }
 
-.formClass input::placeholder {
+form input::placeholder {
     text-align: center;
 }
 
-.formClass input[type="submit"] {
+form input[type="submit"] {
     background-color: #298CAC;
     color: white;
     padding: 5px 10px;
@@ -138,4 +138,5 @@ footer {
     display: none;
     border: 1px solid green;
     border-radius: 5px;
+    margin-bottom: 10px;
 }

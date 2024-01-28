@@ -33,7 +33,7 @@ $('#callRequest-form').submit(function(event) {
                 window.setTimeout(function() {
                     $('#callRequest-success').hide();
                     closePopup();
-                }, 1000);
+                }, 2000);
             }
         },
         error: function() {
