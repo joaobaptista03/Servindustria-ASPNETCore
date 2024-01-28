@@ -1,40 +1,52 @@
-/* admin.css */
+.bigContainer {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
 
-/* General styling for the call request containers */
 .callRequestContainer {
-    background-color: #fff; /* White background for contrast */
-    border: 1px solid #ddd; /* Light border for separation */
-    border-radius: 5px; /* Slightly rounded corners */
-    padding: 20px; /* Padding for inner spacing */
-    margin-bottom: 20px; /* Margin for separation between sections */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 600px;
+    height: fit-content;
+    text-align: center;
+    margin: 50px;
 }
 
-/* Styling for the headings in each container */
 .callRequestContainer h1 {
-    color: #298CAC; /* Using the primary color from main.css */
-    margin-bottom: 15px; /* Space below the heading */
+    color: #298CAC;
+    margin-bottom: 15px;
 }
 
-/* Styling for each call request block */
 .callRequest {
-    border-bottom: 1px solid #eee; /* Light border for separation */
-    padding-bottom: 10px; /* Padding at the bottom */
-    margin-bottom: 10px; /* Margin at the bottom */
+    border-top: 2px solid #eee;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
-.callRequest:last-child {
-    border-bottom: none; /* Remove border for the last element */
-}
-
-/* Styling for paragraph elements inside callRequest */
 .callRequest p {
-    margin: 5px 0; /* Margin for spacing */
-    color: #333; /* Darker text for readability */
-    line-height: 1.5; /* Line height for better readability */
+    margin: 5px 0;
+    line-height: 1.5;
 }
 
-/* Specific styling for certain paragraphs based on content, if needed */
-.callRequest p.empresa,
-.callRequest p.telefone {
-    font-weight: bold; /* Making specific paragraphs bold */
+.invisible-btn {
+    visibility: hidden;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination span {
+    padding-top: 0.8%;
+    color: black;
+}
+
+.pagination input {
+    margin: 0px 10px;
 }

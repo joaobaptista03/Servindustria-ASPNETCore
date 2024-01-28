@@ -24,16 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-/* MOVABLE ICON */
-document.getElementById('movablePhone').onclick = function() {
-    var popupBox = document.getElementById('popupBox');
-    if (popupBox.classList.contains('popup-visible')) {
-        popupBox.classList.remove('popup-visible');
-    } else {
-        popupBox.classList.add('popup-visible');
-    }
-};
-
 /* CALL REQUEST SUBMIT */
 $('#callRequest-form').off('submit').on('submit', function(event) {
     event.preventDefault();

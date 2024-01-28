@@ -102,24 +102,24 @@ footer {
     align-items: center;
 }
 
-.formClass input {
+input {
     margin: 5px;
     padding: 5px;
     border: 1px solid #298CAC;
     border-radius: 5px;
 }
 
-.formClass input:focus {
+input:focus {
     outline: none;
     border: 1px solid #298CAC;
     box-shadow: 0px 0px 5px #298CAC
 }
 
-.formClass input::placeholder {
+input::placeholder {
     text-align: center;
 }
 
-.formClass input[type="submit"] {
+input[type="submit"] {
     background-color: #298CAC;
     color: white;
     padding: 5px 10px;

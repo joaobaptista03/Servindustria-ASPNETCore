@@ -16,13 +16,20 @@ public class CallRequestRepository : ICallRequestRepository {
         await _context.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<CallRequest>> GetAllAsync() {
-        return await _context.CallRequests.ToListAsync();
-    }
-
     public async Task SetSeenUnseenAsync(int id) {
         var callRequest = await _context.CallRequests.FindAsync(id);
         if (callRequest != null) callRequest.Seen = !callRequest.Seen;
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<(IEnumerable<CallRequest> callRequests, int totalCount)> GetCallRequestsAsync(int currentPage, int pageSize, bool seen) {
+        var callRequests = _context.CallRequests.Where(cr => cr.Seen == seen)
+            .OrderByDescending(cr => cr.Date)
+            .Skip((currentPage - 1) * pageSize)
+            .Take(pageSize);
+            
+        int totalCount = _context.CallRequests.Count(cr => cr.Seen == seen);
+        
+        return (await callRequests.ToListAsync(), totalCount);
     }
 }
