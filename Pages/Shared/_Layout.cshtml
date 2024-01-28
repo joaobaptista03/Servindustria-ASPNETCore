@@ -19,12 +19,20 @@
                 <li class="@(currentPage.EndsWith("/") ? "currentPage" : "")">
                     <a asp-page="Index">Página Inicial</a>
                 </li>
-                <li class="@(currentPage.EndsWith("/sobre") ? "currentPage" : "")">
-                    <a asp-page="About">Sobre</a>
-                </li>
-                <li class="@(currentPage.EndsWith("/contacto") ? "currentPage" : "")">
-                    <a asp-page="Contact">Contacto</a>
-                </li>
+
+                @if (User.IsInRole("Admin")) {
+                    <li class="@(currentPage.EndsWith("/admin") ? "currentPage" : "")">
+                        <a asp-page="Admin">Painel de Administrador</a>
+                    </li>                  
+                } else {
+                    <li class="@(currentPage.EndsWith("/sobre") ? "currentPage" : "")">
+                        <a asp-page="About">Sobre</a>
+                    </li>
+                    <li class="@(currentPage.EndsWith("/contacto") ? "currentPage" : "")">
+                        <a asp-page="Contact">Contacto</a>
+                    </li>  
+                }
+                
                 @if (User.Identity != null && User.Identity.IsAuthenticated) {
                     <li>
                         <form id="logout-form" method="post" asp-page="/Authentication" asp-page-handler="Logout">
@@ -45,13 +53,12 @@
             <div id="movableContainer">
                <img src="~/imgs/phone.png" alt="Ligue-me" id="movablePhone"/>
 
-                <div id="popupBox" style="display: none;">
-                    <span id="closePopup" onclick="closePopup()">&times;</span>
+                <div id="popupBox">
                     <p>Quer ser contactado?</p>
                     <p>Digite o seu número!</p>
                     <div id="callRequest-error" class="error"></div>
                     <div id="callRequest-success" class="success"></div>
-                    <form id="callRequest-form" method="post" asp-page="/Contact" asp-page-handler="CallRequest">
+                    <form id="callRequest-form" class="formClass" method="post" asp-page="/Contact" asp-page-handler="CallRequest">
                         @Html.AntiForgeryToken()
                         <input type="text" name="Name" placeholder="Nome" required/>
                         <input type="text" name="Company" placeholder="Empresa (opcional)"/>

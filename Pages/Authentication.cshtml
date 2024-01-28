@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="~/css/authentication.css" asp-append-version="true">
 
 <div id="authentication">
-    <form id="login-form" method="post" asp-page="/Authentication" asp-page-handler="Login">
+    <form id="login-form" class="formClass" method="post" asp-page="/Authentication" asp-page-handler="Login">
         @Html.AntiForgeryToken()
         <p>Já tem conta? Faça login!</p>
         <div id="login-error" class="error"></div>
@@ -15,7 +15,7 @@
         <input type="submit" value="Login"/>
     </form>
 
-    <form id="register-form" method="post" asp-page="/Authentication" asp-page-handler="Register">
+    <form id="register-form" class="formClass" method="post" asp-page="/Authentication" asp-page-handler="Register">
         @Html.AntiForgeryToken()
         <p>Ainda não tem conta? Registe-se!</p>
         <div id="register-error" class="error"></div>

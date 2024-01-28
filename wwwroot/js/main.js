@@ -8,12 +8,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* MOVABLE ICON */
 document.getElementById('movablePhone').onclick = function() {
-    document.getElementById('popupBox').style.display = 'block';
+    var popupBox = document.getElementById('popupBox');
+    if (popupBox.classList.contains('popup-visible')) {
+        popupBox.classList.remove('popup-visible');
+    } else {
+        popupBox.classList.add('popup-visible');
+    }
 };
-
-function closePopup() {
-    document.getElementById('popupBox').style.display = 'none';
-}
 
 /* CALL REQUEST SUBMIT */
 $('#callRequest-form').submit(function(event) {

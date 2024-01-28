@@ -13,7 +13,7 @@ $('#login-form').submit(function(event) {
                 $('#login-error').hide();
                 $('#login-success').html('Login feito com sucesso! A redirecionar...').show();
                 setTimeout(function() {
-                    window.location.reload();
+                    window.location.href = '/';
                 }, 1000);
             }
         },
@@ -40,7 +40,7 @@ $('#register-form').submit(function(event) {
                 $('#register-error').hide();
                 $('#register-success').html('Registrado com sucesso! A redirecionar').show();
                 setTimeout(function() {
-                    window.location.reload();
+                    window.location.href = '/';
                 }, 1000);
             }
         },
