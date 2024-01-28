@@ -16,21 +16,21 @@ public class AuthenticationModel : PageModel {
     public User? NewUser { get; set; }
     
     [BindProperty]
-    public string? ConfirmPassword { get; set; }
+    public string? ConfirmPassword { get; set; } = "";
 
     /* LOGIN */
     [BindProperty]
-    public string? loginEmail { get; set; }
+    public string? loginEmail { get; set; } = "";
     
     [BindProperty]
-    public string? loginPassword { get; set; }
+    public string? loginPassword { get; set; } = "";
 
     public AuthenticationModel(IUserRepository repository) {
         _repository = repository;
     }
 
     public async Task<IActionResult> OnPostLoginAsync() {
-        if (loginEmail == null || loginPassword == null) return new JsonResult(new {success = false, error = "Unknown Error"});
+        if (loginEmail == null || loginPassword == null) return new JsonResult(new {success = false, error = "Email e/ou Password incorretos"});
 
         if (await _repository.LoginAsync(loginEmail, loginPassword)) {
             var Claims = new List<Claim> {
@@ -41,23 +41,33 @@ public class AuthenticationModel : PageModel {
         
             return new JsonResult(new {success = true});
         } else {
-            return new JsonResult(new {success = false, error = "Invalid credentials"});
+            return new JsonResult(new {success = false, error = "Email ou Password incorretos"});
         }
     }
 
     public async Task<IActionResult> OnPostRegisterAsync() {
-        if (NewUser == null) return new JsonResult(new {success = false, error = "Unknown Error"});
+        if (NewUser == null) return new JsonResult(new {success = false, errors = "Unknown Error"});
 
         if (await _repository.EmailExistsAsync(NewUser.Email)) ModelState.AddModelError("Email", "Já existe um utilizador com este email");
-        if (await _repository.NifExistsAsync(NewUser.Nif)) ModelState.AddModelError("Nif", "Já existe um utilizador com este NIF");
+        if (NewUser.Nif.HasValue)
+            if (await _repository.NifExistsAsync(NewUser.Nif.Value))
+                ModelState.AddModelError("Nif", "Já existe um utilizador com este NIF");
         
         if (!IsValidEmail(NewUser.Email)) ModelState.AddModelError("Email", "O email não é válido");
         if (NewUser.Password != ConfirmPassword) ModelState.AddModelError("Password", "As passwords não coincidem");
-        int nifLength = Math.Abs(NewUser.Nif).ToString().Length;
+        
+        if (NewUser.Nif.HasValue) {
+            int nifLength = Math.Abs(NewUser.Nif.Value).ToString().Length;
+            if (NewUser.Nif == 0) nifLength = 0;
             if (nifLength != 9 && nifLength != 0) ModelState.AddModelError("Nif", "O NIF deve ter 9 dígitos");
-        int phoneLength = Math.Abs(NewUser.Phone).ToString().Length;
-            if (phoneLength != 9 && phoneLength != 0) ModelState.AddModelError("Phone", "O número de telefone / telemóvel deve ter 9 dígitos");
-
+        }
+        
+        if (NewUser.Phone.HasValue) {
+            int phoneLength = Math.Abs(NewUser.Phone.Value).ToString().Length;
+            if (NewUser.Phone == 0) phoneLength = 0;
+                if (phoneLength != 9 && phoneLength != 0) ModelState.AddModelError("Phone", "O número de telefone / telemóvel deve ter 9 dígitos");
+        }
+        
         var modelErrors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
         if (modelErrors.Count > 0) return new JsonResult(new {success = false, errors = modelErrors});
 
@@ -98,8 +108,9 @@ public class AuthenticationModel : PageModel {
             return false;
         }
     }
-    public async Task<IActionResult> OnPostLogout() {
+    
+    public async Task<IActionResult> OnPostLogoutAsync() {
         await HttpContext.SignOutAsync("AuthCookies");
-        return RedirectToPage("/Index");
+        return new JsonResult(new {success = true});
     }
 }

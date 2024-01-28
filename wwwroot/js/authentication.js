@@ -34,7 +34,7 @@ $('#register-form').submit(function(event) {
         success: function(response) {
             if (!response.success) {
                 $('#register-success').hide();
-                $('#register-error').html(response.errors).show();
+                $('#register-error').html(response.errors.join('<br>')).show();
 
             } else {
                 $('#register-error').hide();

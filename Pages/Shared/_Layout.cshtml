@@ -27,7 +27,8 @@
                 </li>
                 @if (User.Identity != null && User.Identity.IsAuthenticated) {
                     <li>
-                        <form id="logoutForm" method="post" asp-page="/Authentication" asp-page-handler="Logout">
+                        <form id="logout-form" method="post" asp-page="/Authentication" asp-page-handler="Logout">
+                            @Html.AntiForgeryToken()
                             <a href="#" id="logout-button">Logout</a>
                         </form>
                     </li>
@@ -41,6 +42,25 @@
         </header>
 
         <main>
+            <div id="movableContainer">
+               <img src="~/imgs/phone.png" alt="Ligue-me" id="movablePhone"/>
+
+                <div id="popupBox" style="display: none;">
+                    <span id="closePopup" onclick="closePopup()">&times;</span>
+                    <p>Quer ser contactado?</p>
+                    <p>Digite o seu número!</p>
+                    <div id="callRequest-error" class="error"></div>
+                    <div id="callRequest-success" class="success"></div>
+                    <form id="callRequest-form" method="post" asp-page="/Contact" asp-page-handler="CallRequest">
+                        @Html.AntiForgeryToken()
+                        <input type="text" name="Name" placeholder="Nome" required/>
+                        <input type="text" name="Company" placeholder="Empresa (opcional)"/>
+                        <input type="number" name="Phone" placeholder="Nº Telefone / Telemóvel" required/>
+                        <input type="text" name="Message" placeholder="Observações (opcional)" />
+                        <input type="submit" value="Ligar-me"/>
+                    </form>
+                </div>
+            </div>
             @RenderBody()
         </main>
 
@@ -50,6 +70,7 @@
             </p>
         </footer>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="~/js/main.js" asp-append-version="true"></script>
         @RenderSection("Scripts", required: false)
     </body>

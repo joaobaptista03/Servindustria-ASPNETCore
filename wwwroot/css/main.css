@@ -1,6 +1,7 @@
 /* -------------------------------------------- FULL -------------------------------------------- */
 
 html, body {
+    background-color: #f5f5f5;
     font-family: Courier;
     height: 100%;
     display: flex;
@@ -27,13 +28,16 @@ header ul /* MENU */ {
     align-items: center;
 }
 
-header ul li a /* EACH MENU OPTION */ {
+header ul li a, header ul li form input /* EACH MENU OPTION */ {
     text-decoration: none;
     color: white;
     transition: all 0.2s ease;
+    font-family: Courier;
+    font-size: 15px;
+    display: inline;
 }
 
-header ul li a:hover /* HOVER OF EACH MENU OPTION */ {
+header ul li a:hover, header ul li form input:hover /* HOVER OF EACH MENU OPTION */ {
     transition: all 0.2s ease;
     box-shadow: 0px 2px 0px;
     padding: 5px 10px;
@@ -41,6 +45,38 @@ header ul li a:hover /* HOVER OF EACH MENU OPTION */ {
 
 .currentPage a /* CURRENT PAGE */ {
     color: black;
+}
+
+/* ----------------------------------------- MOVABLE ICON ----------------------------------------- */
+
+#movableContainer {
+    position: absolute;
+    transform: translate(50px, 50px);
+}
+
+#movablePhone {
+    position: absolute;
+    cursor: pointer;
+    width: 50px;
+}
+
+/* ------------------------------------------ ICON POPUP ------------------------------------------ */
+
+#popupBox {
+    position: absolute;
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    top: 50px;
+    left: 40px;
+    text-align: center;
+}
+
+#closePopup {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+
 }
 
 /* -------------------------------------------- FOOTER -------------------------------------------- */
@@ -51,4 +87,55 @@ footer {
     align-items: center;
     justify-content: center;
     list-style-type: none;
+}
+
+/* -------------------------------------------- MAIN STYLES -------------------------------------------- */
+
+.formClass {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formClass input {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #298CAC;
+    border-radius: 5px;
+}
+
+.formClass input:focus {
+    outline: none;
+    border: 1px solid #298CAC;
+    box-shadow: 0px 0px 5px #298CAC
+}
+
+.formClass input::placeholder {
+    text-align: center;
+}
+
+.formClass input[type="submit"] {
+    background-color: #298CAC;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.error {
+    color:red;
+    text-align: center;
+    padding: 10px;
+    display: none;
+    border: 1px solid red;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.success {
+    color:green;
+    text-align: center;
+    padding:10px;
+    display: none;
+    border: 1px solid green;
+    border-radius: 5px;
 }

@@ -1,13 +1,14 @@
 document.getElementById('logout-button').addEventListener('click', function(e) {
     e.preventDefault();
-    fetch('/Authentication?handler=Logout', {
-        method: 'POST',
-        headers: {
-            'RequestVerificationToken': document.querySelector('#logoutForm input[name="__RequestVerificationToken"]').value,
-        }
-    }).then(response => {
-        if (response.ok) {
-            window.location.href = '/';
-        }
+    var form = this.closest('form');
+    $.ajax({
+        type: form.method,
+        url: form.action,
+        data: $(form).serialize(),
+        success: function(response) {
+            if (response.success) {
+                window.location.href = '/';
+            }
+        },
     });
 });

@@ -1,31 +1,37 @@
 @page "/autenticacao"
 @model AuthenticationModel
 
-<div id="login-error" style="color:red; text-align: center; padding:10px; display: none;"></div>
-<div id="login-success" style="color:green; text-align:center; padding:10px; display: none;"></div>
-<form id="login-form" method="post" asp-page="/Authentication" asp-page-handler="Login">
-    @Html.AntiForgeryToken()
-    <input type="text" name="loginEmail" placeholder="Email" />
-    <input type="password" name="loginPassword" placeholder="Password" />
-    
-    <button type="submit">Login</button>
-</form>
+<link rel="stylesheet" href="~/css/authentication.css" asp-append-version="true">
 
-<div id="register-error" style="color:red; text-align: center; padding:10px; display: none;"></div>
-<div id="register-success" style="color:green; text-align:center; padding:10px; display: none;"></div>
-<form id="register-form" method="post" asp-page="/Authentication" asp-page-handler="Register">
-    @Html.AntiForgeryToken()
-    <input type="text" name="Name" placeholder="Nome" required/>
-    <input type="text" name="Company" placeholder="Empresa"/>
-    <input type="text" name="Address" placeholder="Morada"/>
-    <input type="number" name="Nif" placeholder="NIF"/>
-    <input type="number" name="Phone" placeholder="Telefone / Telemóvel"/>
-    <input type="text" name="Email" placeholder="Email" required/>
-    <input type="password" name="Password" placeholder="Password" required/>
-    <input type="password" name="ConfirmPassword" placeholder="Confirmação da Password" required/>
-    
-    <button type="submit">Register</button>
-</form>
+<div id="authentication">
+    <form id="login-form" class="formClass" method="post" asp-page="/Authentication" asp-page-handler="Login">
+        @Html.AntiForgeryToken()
+        <p>Já tem conta? Faça login!</p>
+        <div id="login-error" class="error"></div>
+        <div id="login-success" class="success"></div>
+        <input type="text" name="loginEmail" placeholder="Email" />
+        <input type="password" name="loginPassword" placeholder="Password" />
+        
+        <input type="submit" value="Login"/>
+    </form>
+
+    <form id="register-form" class="formClass" method="post" asp-page="/Authentication" asp-page-handler="Register">
+        @Html.AntiForgeryToken()
+        <p>Ainda não tem conta? Registe-se!</p>
+        <div id="register-error" class="error"></div>
+        <div id="register-success" class="success"></div>
+        <input type="text" name="Name" placeholder="Nome" required/>
+        <input type="text" name="Company" placeholder="Empresa"/>
+        <input type="text" name="Address" placeholder="Morada"/>
+        <input type="number" name="Nif" placeholder="NIF"/>
+        <input type="number" name="Phone" placeholder="Telefone / Telemóvel"/>
+        <input type="text" name="Email" placeholder="Email" required/>
+        <input type="password" name="Password" placeholder="Password" required/>
+        <input type="password" name="ConfirmPassword" placeholder="Confirmação da Password" required/>
+        
+        <input type="submit" value="Registar"/>
+    </form>
+</div>
 
 @section Scripts {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
