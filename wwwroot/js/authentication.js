@@ -1,4 +1,4 @@
-$('#login-form').submit(function(event) {
+$('#login-form').off('submit').on('submit', function(event) {
     event.preventDefault();
 
     $.ajax({
@@ -24,7 +24,7 @@ $('#login-form').submit(function(event) {
     });
 });
 
-$('#register-form').submit(function(event) {
+$('#register-form').off('submit').on('submit', function(event) {
     event.preventDefault();
 
     $.ajax({

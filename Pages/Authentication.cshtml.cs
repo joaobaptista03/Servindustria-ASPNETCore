@@ -29,6 +29,11 @@ public class AuthenticationModel : PageModel {
         _repository = repository;
     }
 
+    public IActionResult OnGet() {
+        if (User.Identity != null && User.Identity.IsAuthenticated) return RedirectToPage("/Index");
+        return Page();
+    }
+
     public async Task<IActionResult> OnPostLoginAsync() {
         if (loginEmail == null || loginPassword == null) return new JsonResult(new {success = false, error = "Email e/ou Password incorretos"});
 

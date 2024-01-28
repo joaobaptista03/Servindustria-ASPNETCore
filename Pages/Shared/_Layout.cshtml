@@ -4,6 +4,8 @@
     string currentPage = String.Empty;
     if (Context != null && Context.Request != null && Context.Request.Path != null)
         { currentPage = Context.Request.Path; }
+    
+    bool isAdmin = User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("Admin");
 }
 
 <html>
@@ -16,25 +18,25 @@
     <body>
         <header>
             <ul>
-                <li class="@(currentPage.EndsWith("/") ? "currentPage" : "")">
+                <li class="@(currentPage.EndsWith("/") ? "currentPage" : "exit-trigger")">
                     <a asp-page="Index">Página Inicial</a>
                 </li>
 
-                @if (User.IsInRole("Admin")) {
-                    <li class="@(currentPage.EndsWith("/admin") ? "currentPage" : "")">
+                @if (isAdmin) {
+                    <li class="@(currentPage.EndsWith("/admin") ? "currentPage" : "exit-trigger")">
                         <a asp-page="Admin">Painel de Administrador</a>
                     </li>                  
                 } else {
-                    <li class="@(currentPage.EndsWith("/sobre") ? "currentPage" : "")">
+                    <li class="@(currentPage.EndsWith("/sobre") ? "currentPage" : "exit-trigger")">
                         <a asp-page="About">Sobre</a>
                     </li>
-                    <li class="@(currentPage.EndsWith("/contacto") ? "currentPage" : "")">
+                    <li class="@(currentPage.EndsWith("/contacto") ? "currentPage" : "exit-trigger")">
                         <a asp-page="Contact">Contacto</a>
                     </li>  
                 }
                 
                 @if (User.Identity != null && User.Identity.IsAuthenticated) {
-                    <li>
+                    <li class="exit-trigger">
                         <form id="logout-form" method="post" asp-page="/Authentication" asp-page-handler="Logout">
                             @Html.AntiForgeryToken()
                             <a href="#" id="logout-button">Logout</a>
@@ -42,16 +44,15 @@
                     </li>
                     <script src="~/js/logout.js" asp-append-version="true"></script>
                 } else {
-                    <li class="@(currentPage.EndsWith("/authentication") ? "currentPage" : "")">
+                    <li class="@(currentPage.EndsWith("/autenticacao") ? "currentPage" : "exit-trigger")">
                         <a asp-page="Authentication">Login / Registar</a>
                     </li>
                 }
             </ul>
         </header>
-
-        <main>
+        @if (!isAdmin) {
             <div id="movableContainer">
-               <img src="~/imgs/phone.png" alt="Ligue-me" id="movablePhone"/>
+                <img src="~/imgs/phone.png" alt="Ligue-me" id="movablePhone"/>
 
                 <div id="popupBox">
                     <p>Quer ser contactado?</p>
@@ -68,6 +69,8 @@
                     </form>
                 </div>
             </div>
+        }
+        <main>
             @RenderBody()
         </main>
 

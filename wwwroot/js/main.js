@@ -1,9 +1,27 @@
-/* MAIN FADE-IN */
 document.addEventListener('DOMContentLoaded', function() {
+    /* MAIN FADE-IN */
     setTimeout(function() {
         var mainElement = document.querySelector('main');
         if (mainElement) mainElement.style.opacity = 1;
     }, 10);
+
+    /* MAIN FADE-OUT */
+    var exitElements = document.querySelectorAll('.exit-trigger');
+    exitElements.forEach(function(element) {
+        element.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            var mainElement = document.querySelector('main');
+            if (mainElement) {
+                mainElement.style.transition = '0.4s ease;';
+                mainElement.style.opacity = 0;
+            }
+
+            setTimeout(function() {
+                window.location.href = event.target.href;
+            }, 400);
+        });
+    });
 });
 
 /* MOVABLE ICON */
@@ -17,7 +35,7 @@ document.getElementById('movablePhone').onclick = function() {
 };
 
 /* CALL REQUEST SUBMIT */
-$('#callRequest-form').submit(function(event) {
+$('#callRequest-form').off('submit').on('submit', function(event) {
     event.preventDefault();
 
     $.ajax({
@@ -33,7 +51,7 @@ $('#callRequest-form').submit(function(event) {
                 $('#callRequest-success').html('Pedido registado. Iremos contactá-lo logo que possível!').show();
                 window.setTimeout(function() {
                     $('#callRequest-success').hide();
-                    closePopup();
+                    document.getElementById('popupBox').classList.remove('popup-visible');
                 }, 2000);
             }
         },

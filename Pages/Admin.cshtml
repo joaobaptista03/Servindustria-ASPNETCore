@@ -1,0 +1,52 @@
+@page "/admin"
+@model AdminModel
+
+<link rel="stylesheet" href="~/css/admin.css" asp-append-version="true">
+
+<div class="callRequestContainer">
+    <h1>Pedidos de Contacto Não Vistos</h1>
+    @foreach (var item in Model.UnseenCallRequests)
+    {
+        <div class="callRequest">
+            <p>Nome: @item.Name</p>
+            @if (item.Company != null)
+            {
+                <p>Empresa: @item.Company</p>
+            }
+            <p>Telefone: @item.Phone</p>
+            @if (item.Message != null) {
+                <p>Mensagem: @item.Message</p>
+            }
+            <p>Data: @item.Date.ToString("dd-MM-yyyy HH:mm:ss")</p>
+
+            <form method="post" asp-page="/Admin" asp-page-handler="SeenUnseen">
+                <input type="hidden" name="id" value="@item.Id" />
+                <input type="submit" value="Visto" />
+            </form>
+        </div>
+    }
+</div>
+
+<div class="callRequestContainer">
+    <h1>Pedidos de Contacto Vistos</h1>
+    @foreach (var item in Model.SeenCallRequests)
+    {
+        <div class="callRequest">
+            <p>Nome: @item.Name</p>
+            @if (item.Company != null)
+            {
+                <p>Empresa: @item.Company</p>
+            }
+            <p>Telefone: @item.Phone</p>
+            @if (item.Message != null) {
+                <p>Mensagem: @item.Message</p>
+            }
+            <p>Data: @item.Date.ToString("dd-MM-yyyy HH:mm:ss")</p>
+
+            <form method="post" asp-page="/Admin" asp-page-handler="SeenUnseen">
+                <input type="hidden" name="id" value="@item.Id" />
+                <input type="submit" value="Não Visto" />
+            </form>
+        </div>
+    }
+</div>
