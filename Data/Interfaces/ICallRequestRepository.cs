@@ -1,8 +1,8 @@
 using Servindustria.Models;
 
 namespace Servindustria.Data.Interfaces;
-public interface ICallRequestRepository {
-    Task AddCallRequestAsync(CallRequest callRequest);
+public interface IAdminCallRequestRepository {
+    Task AddAdminCallRequestAsync(AdminCallRequest callRequest);
     Task SetSeenUnseenAsync(int id);
-    Task<(IEnumerable<CallRequest> callRequests, int totalCount)> GetCallRequestsAsync(int currentPage, int pageSize, bool seen);
+    Task<(IEnumerable<AdminCallRequest> callRequests, int totalCount)> GetAdminCallRequestsAsync(int currentPage, int pageSize, bool seen);
 }

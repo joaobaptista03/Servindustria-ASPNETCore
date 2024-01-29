@@ -7,5 +7,5 @@ public class ServindustriaDBContext : DbContext {
     public ServindustriaDBContext(DbContextOptions<ServindustriaDBContext> options) : base(options) {}
     
     public DbSet<User> Users { get; set; }
-    public DbSet<CallRequest> CallRequests { get; set; }
+    public DbSet<AdminCallRequest> AdminCallRequests { get; set; }
 }

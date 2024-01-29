@@ -1,6 +1,6 @@
 namespace Servindustria.Models;
 
-public class CallRequest {
+public class AdminCallRequest {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
     public string? Company { get; set; }

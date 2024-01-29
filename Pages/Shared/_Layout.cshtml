@@ -24,7 +24,7 @@
 
                 @if (isAdmin) {
                     <li class="@(currentPage.EndsWith("/admin/pedidosContacto") ? "currentPage" : "exit-trigger")">
-                        <a asp-page="CallRequests">Pedidos de Contacto</a>
+                        <a asp-page="AdminCallRequests">Pedidos de Contacto</a>
                     </li>                  
                 } else {
                     <li class="@(currentPage.EndsWith("/sobre") ? "currentPage" : "exit-trigger")">
@@ -59,7 +59,7 @@
                     <p>Digite o seu número!</p>
                     <div id="callRequest-error" class="error"></div>
                     <div id="callRequest-success" class="success"></div>
-                    <form id="callRequest-form" class="formClass" method="post" asp-page="/Contact" asp-page-handler="CallRequest">
+                    <form id="callRequest-form" class="formClass" method="post" asp-page="/Contact" asp-page-handler="AdminCallRequest">
                         @Html.AntiForgeryToken()
                         <input type="text" name="Name" placeholder="Nome" required/>
                         <input type="text" name="Company" placeholder="Empresa (opcional)"/>

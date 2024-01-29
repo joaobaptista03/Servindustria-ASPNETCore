@@ -10,7 +10,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<ServindustriaDBContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("ServindustriaDBContext")));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<ICallRequestRepository, CallRequestRepository>();
+builder.Services.AddScoped<IAdminCallRequestRepository, AdminCallRequestRepository>();
 
 builder.Services.AddAuthentication("AuthCookies")
     .AddCookie("AuthCookies", options =>
