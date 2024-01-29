@@ -23,8 +23,8 @@
                 </li>
 
                 @if (isAdmin) {
-                    <li class="@(currentPage.EndsWith("/admin") ? "currentPage" : "exit-trigger")">
-                        <a asp-page="Admin">Painel de Administrador</a>
+                    <li class="@(currentPage.EndsWith("/admin/pedidosContacto") ? "currentPage" : "exit-trigger")">
+                        <a asp-page="CallRequests">Pedidos de Contacto</a>
                     </li>                  
                 } else {
                     <li class="@(currentPage.EndsWith("/sobre") ? "currentPage" : "exit-trigger")">

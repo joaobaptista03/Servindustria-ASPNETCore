@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
 
-public class AdminModel : PageModel {
+public class CallRequestsModel : PageModel {
     private readonly IUserRepository _userRepository;
     private readonly ICallRequestRepository _callRequestRepository;
 
-    public AdminModel(IUserRepository userRepository, ICallRequestRepository callRequestRepository) {
+    public CallRequestsModel(IUserRepository userRepository, ICallRequestRepository callRequestRepository) {
         _userRepository = userRepository;
         _callRequestRepository = callRequestRepository;
     }
@@ -38,22 +38,32 @@ public class AdminModel : PageModel {
         TotalSeenCallRequests = seenCallRequests.totalCount;
         SeenCallRequests = seenCallRequests.callRequests;
         UnseenCallRequests = unseenCallRequests.callRequests;
+
+        if (UnseenCallRequestsCurrentPage > 1 && UnseenCallRequests.Count() == 0) {
+            UnseenCallRequestsCurrentPage--;
+            return RedirectToPage("/CallRequests", new { UnseenCallRequestsCurrentPage, SeenCallRequestsCurrentPage });
+        }
+
+        if (SeenCallRequestsCurrentPage > 1 && SeenCallRequests.Count() == 0) {
+            SeenCallRequestsCurrentPage--;
+            return RedirectToPage("/CallRequests", new { UnseenCallRequestsCurrentPage, SeenCallRequestsCurrentPage });
+        }
         
         return Page();
 }
 
-    public async Task<IActionResult> OnPostSeenUnseenAsync(int id) {
+    public async Task<IActionResult> OnPostSeenUnseenAsync(int id, int UnseenCallRequestsCurrentPage, int SeenCallRequestsCurrentPage) {
         if (User.Identity == null || !User.Identity.IsAuthenticated) return RedirectToPage("/Authentication");
         if (!User.IsInRole("Admin")) return RedirectToPage("/Index");
 
         await _callRequestRepository.SetSeenUnseenAsync(id);
-        return RedirectToPage("/Admin");
+        return RedirectToPage("/CallRequests");
     }
 
-    public IActionResult OnPostPage(int SeenCallRequestsCurrentPage, int UnseenCallRequestsCurrentPage) {
+    public IActionResult OnPostPage(int UnseenCallRequestsCurrentPage, int SeenCallRequestsCurrentPage) {
         if (User.Identity == null || !User.Identity.IsAuthenticated) return RedirectToPage("/Authentication");
         if (!User.IsInRole("Admin")) return RedirectToPage("/Index");
 
-        return RedirectToPage("/Admin", new { UnseenCallRequestsCurrentPage, SeenCallRequestsCurrentPage });
+        return RedirectToPage("/CallRequests", new { UnseenCallRequestsCurrentPage, SeenCallRequestsCurrentPage });
     }
 }
