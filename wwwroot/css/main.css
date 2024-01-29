@@ -18,7 +18,7 @@ main {
 /* -------------------------------------------- HEADER -------------------------------------------- */
 
 header {
-    background-color: #298CAC;
+    background-color: #242e7d;
 }
 
 header ul /* MENU */ {
@@ -51,7 +51,7 @@ header ul li a:hover /* HOVER OF EACH MENU OPTION */ {
 }
 
 .currentPage a /* CURRENT PAGE */ {
-    color: black;
+    color: grey;
 }
 
 /* ----------------------------------------- MOVABLE ICON ----------------------------------------- */
@@ -87,7 +87,8 @@ header ul li a:hover /* HOVER OF EACH MENU OPTION */ {
 /* -------------------------------------------- FOOTER -------------------------------------------- */
 
 footer {
-    background-color: #298CAC;
+    background-color: #242e7d;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -105,14 +106,14 @@ footer {
 input {
     margin: 5px;
     padding: 5px;
-    border: 1px solid #298CAC;
+    border: 1px solid #242e7d;
     border-radius: 5px;
 }
 
 input:focus {
     outline: none;
-    border: 1px solid #298CAC;
-    box-shadow: 0px 0px 5px #298CAC
+    border: 1px solid #242e7d;
+    box-shadow: 0px 0px 5px #242e7d
 }
 
 input::placeholder {
@@ -120,7 +121,7 @@ input::placeholder {
 }
 
 input[type="submit"] {
-    background-color: #298CAC;
+    background-color: #242e7d;
     color: white;
     padding: 5px 10px;
     cursor: pointer;

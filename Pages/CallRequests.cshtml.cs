@@ -31,6 +31,17 @@ public class CallRequestsModel : PageModel {
         UnseenCallRequestsCurrentPage = unseenCallRequestsCurrentPage;
         SeenCallRequestsCurrentPage = seenCallRequestsCurrentPage;
 
+        // If the page is less than 0, set it to 1
+        if (UnseenCallRequestsCurrentPage <= 0) {
+            UnseenCallRequestsCurrentPage = 1;
+            return RedirectToPage("/CallRequests", new { UnseenCallRequestsCurrentPage, SeenCallRequestsCurrentPage });
+        }
+
+        if (SeenCallRequestsCurrentPage <= 0) {
+            SeenCallRequestsCurrentPage = 1;
+            return RedirectToPage("/CallRequests", new { UnseenCallRequestsCurrentPage, SeenCallRequestsCurrentPage });
+        }
+
         var unseenCallRequests = await _callRequestRepository.GetCallRequestsAsync(UnseenCallRequestsCurrentPage, PageSize, false);
         var seenCallRequests = await _callRequestRepository.GetCallRequestsAsync(SeenCallRequestsCurrentPage, PageSize, true);
 
@@ -38,6 +49,16 @@ public class CallRequestsModel : PageModel {
         TotalSeenCallRequests = seenCallRequests.totalCount;
         SeenCallRequests = seenCallRequests.callRequests;
         UnseenCallRequests = unseenCallRequests.callRequests;
+
+        if (UnseenCallRequestsCurrentPage > (TotalUnseenCallRequests / PageSize + 1)) {
+            UnseenCallRequestsCurrentPage = (int)Math.Ceiling((double)TotalUnseenCallRequests / PageSize * 100) / 100;
+            return RedirectToPage("/CallRequests", new { UnseenCallRequestsCurrentPage, SeenCallRequestsCurrentPage });
+        }
+
+        if (SeenCallRequestsCurrentPage > (TotalSeenCallRequests / PageSize + 1)) {
+            SeenCallRequestsCurrentPage = (int)Math.Ceiling((double)TotalSeenCallRequests / PageSize * 100) / 100;
+            return RedirectToPage("/CallRequests", new { UnseenCallRequestsCurrentPage, SeenCallRequestsCurrentPage });
+        }
 
         if (UnseenCallRequestsCurrentPage > 1 && UnseenCallRequests.Count() == 0) {
             UnseenCallRequestsCurrentPage--;

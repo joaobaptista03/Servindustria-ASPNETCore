@@ -42,7 +42,10 @@
                 <input class="@(Model.UnseenCallRequestsCurrentPage <= 1 ? "invisible-btn" : "")" type="submit" value="<" />
             </form>
 
-            <span>Página @Model.UnseenCallRequestsCurrentPage</span>
+            @if (Model.TotalUnseenCallRequests != 0)
+            {
+                <span>Página @Model.UnseenCallRequestsCurrentPage</span>
+            }
 
             <form method="post" asp-page="CallRequests" asp-page-handler="Page">
                 <input type="hidden" name="UnseenCallRequestsCurrentPage" value="@(Model.UnseenCallRequestsCurrentPage + 1)" />
@@ -91,7 +94,10 @@
                 <input class="@(Model.SeenCallRequestsCurrentPage <= 1 ? "invisible-btn" : "")" type="submit" value="<" />
             </form>
 
-            <span>Página @Model.SeenCallRequestsCurrentPage</span>
+            @if (Model.TotalSeenCallRequests != 0)
+            {
+                <span>Página @Model.SeenCallRequestsCurrentPage</span>
+            }
 
             <form method="post" asp-page="CallRequests" asp-page-handler="Page">
                 <input type="hidden" name="UnseenCallRequestsCurrentPage" value="@(Model.UnseenCallRequestsCurrentPage)" />
