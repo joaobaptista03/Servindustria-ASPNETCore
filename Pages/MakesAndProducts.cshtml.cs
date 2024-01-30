@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-public class AboutModel : PageModel {
+public class MakesAndProductsModel : PageModel {
     public void OnGet() {
         
     }

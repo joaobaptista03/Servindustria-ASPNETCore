@@ -1,5 +1,5 @@
 all:
-	dotnet run
+	dotnet watch run
 
 clean:
 	dotnet clean

@@ -10,7 +10,9 @@
 
 @* Get Previous Page Name *@
 @{
-    var referrer = Context.Request.Headers["Referer"].ToString();
+    var referrer = "";
+    if (Context != null && Context.Request != null && Context.Request.Headers != null)
+        referrer = Context.Request.Headers["Referer"].ToString();
     string previousPageName = "";
 
     if (!string.IsNullOrEmpty(referrer))
@@ -44,8 +46,8 @@
                         <a asp-page="AdminCallRequests">Pedidos de Contacto</a>
                     </li>                  
                 } else {
-                    <li class="@(currentPage.EndsWith("/sobre") ? "currentPage" : "exit-trigger")">
-                        <a asp-page="About">Sobre</a>
+                    <li class="@(currentPage.EndsWith("/marcas-e-produtos") ? "currentPage" : "exit-trigger")">
+                        <a asp-page="MakesAndProducts">Marcas e Produtos</a>
                     </li>
                     <li class="@(currentPage.EndsWith("/contacto") ? "currentPage" : "exit-trigger")">
                         <a asp-page="Contact">Contacto</a>
@@ -68,7 +70,7 @@
             </ul>
         </header>
         @if (!isAdmin) {
-            <div id="movableContainer" style="@(currentPage.EndsWith("/") ? "" : "transform: translate(50px, 150px);")">
+            <div id="movableContainer" style="@(!currentPage.EndsWith("/") ? "transform: translate(50px, 150px);" : "")">
                 <img src="~/imgs/phone.png" alt="Ligue-me" id="movablePhone"/>
 
                 <div id="popupBox">
