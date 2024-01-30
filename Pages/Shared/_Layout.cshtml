@@ -68,7 +68,7 @@
             </ul>
         </header>
         @if (!isAdmin) {
-            <div id="movableContainer">
+            <div id="movableContainer" style="@(currentPage.EndsWith("/") ? "" : "transform: translate(50px, 150px);")">
                 <img src="~/imgs/phone.png" alt="Ligue-me" id="movablePhone"/>
 
                 <div id="popupBox">
