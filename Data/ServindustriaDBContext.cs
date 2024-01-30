@@ -8,4 +8,5 @@ public class ServindustriaDBContext : DbContext {
     
     public DbSet<User> Users { get; set; }
     public DbSet<AdminCallRequest> AdminCallRequests { get; set; }
+    public DbSet<Product> Products { get; set; }
 }

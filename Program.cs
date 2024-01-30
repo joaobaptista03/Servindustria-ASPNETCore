@@ -11,6 +11,7 @@ builder.Services.AddDbContext<ServindustriaDBContext>(opt => opt.UseSqlServer(bu
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAdminCallRequestRepository, AdminCallRequestRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 builder.Services.AddAuthentication("AuthCookies")
     .AddCookie("AuthCookies", options =>

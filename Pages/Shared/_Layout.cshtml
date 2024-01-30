@@ -46,8 +46,8 @@
                         <a asp-page="AdminCallRequests">Pedidos de Contacto</a>
                     </li>                  
                 } else {
-                    <li class="@(currentPage.EndsWith("/marcas-e-produtos") ? "currentPage" : "exit-trigger")">
-                        <a asp-page="MakesAndProducts">Marcas e Produtos</a>
+                    <li class="@(currentPage.EndsWith("/produtos") ? "currentPage" : "exit-trigger")">
+                        <a asp-page="Products">Produtos</a>
                     </li>
                     <li class="@(currentPage.EndsWith("/contacto") ? "currentPage" : "exit-trigger")">
                         <a asp-page="Contact">Contacto</a>
