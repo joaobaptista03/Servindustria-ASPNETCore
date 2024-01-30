@@ -37,6 +37,15 @@ builder.Logging.AddSerilog();
 
 var app = builder.Build();
 
+app.Use(async (context, next) =>
+{
+    await next();
+    if (context.Response.StatusCode == 404)
+    {
+        context.Response.Redirect("/", permanent: false);
+    }
+});
+
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<ServindustriaDBContext>();

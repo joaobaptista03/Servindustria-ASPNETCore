@@ -8,6 +8,18 @@
     bool isAdmin = User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("Admin");
 }
 
+@* Get Previous Page Name *@
+@{
+    var referrer = Context.Request.Headers["Referer"].ToString();
+    string previousPageName = "";
+
+    if (!string.IsNullOrEmpty(referrer))
+    {
+        var uri = new Uri(referrer);
+        previousPageName = System.IO.Path.GetFileNameWithoutExtension(uri.LocalPath);
+    }
+}
+
 <html>
     <head>
         <title>Servindustria</title>
@@ -17,6 +29,11 @@
 
     <body>
         <header>
+            @if (!currentPage.EndsWith("/")) {
+                <div class="companyName @(previousPageName == "" ? "fromIndex" : "")">
+                    <p>Servindustria</p>
+                </div>
+            }
             <ul>
                 <li class="@(currentPage.EndsWith("/") ? "currentPage" : "exit-trigger")">
                     <a asp-page="Index">Página Inicial</a>

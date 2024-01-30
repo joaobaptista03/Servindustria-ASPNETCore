@@ -54,6 +54,30 @@ header ul li a:hover /* HOVER OF EACH MENU OPTION */ {
     color: grey;
 }
 
+.companyName {
+    text-align: center;
+}
+
+.companyName p {
+    font-size: 30px;
+    color: white;
+    margin-bottom: 0;
+    margin-top: 20px;
+}
+
+.fromIndex p {
+    animation: 0.7s ease-in-out slideDown;
+}
+
+@keyframes slideDown {
+    0% {
+        translate: 0px -200px;
+    }
+    100% {
+        translate: 0px 0px;
+    }
+}
+
 /* ----------------------------------------- MOVABLE ICON ----------------------------------------- */
 
 #movableContainer {
