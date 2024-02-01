@@ -173,3 +173,22 @@ input[type="submit"] {
     border-radius: 5px;
     margin-bottom: 10px;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination span {
+    padding-top: 0.3%;
+    color: black;
+}
+
+.pagination input {
+    margin: 0px 10px;
+}
+
+.invisible-btn {
+    visibility: hidden;
+}
