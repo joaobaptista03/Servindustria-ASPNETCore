@@ -44,7 +44,10 @@
                 @if (isAdmin) {
                     <li class="@(currentPage.EndsWith("/admin/pedidosContacto") ? "currentPage" : "exit-trigger")">
                         <a asp-page="AdminCallRequests">Pedidos de Contacto</a>
-                    </li>                  
+                    </li>
+                <li class="@(currentPage.EndsWith("/admin/adicionarProduto") ? "currentPage" : "exit-trigger")">
+                    <a asp-page="AdminAddProduct">Adicionar Produto</a>
+                </li>
                 } else {
                     <li class="@(currentPage.EndsWith("/produtos") ? "currentPage" : "exit-trigger")">
                         <a asp-page="Products">Produtos</a>

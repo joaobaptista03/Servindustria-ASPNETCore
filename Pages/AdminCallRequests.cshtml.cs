@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
 
+namespace Servindustria.Pages;
+
 public class AdminCallRequestsModel : PageModel {
     private readonly IUserRepository _userRepository;
     private readonly IAdminCallRequestRepository _callRequestRepository;

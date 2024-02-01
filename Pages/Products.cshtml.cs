@@ -5,15 +5,18 @@ using Servindustria.Models;
 
 public class ProductsModel : PageModel {
     public IProductRepository _productRepository;
+    private readonly IWebHostEnvironment _environment;
 
-    public ProductsModel(IProductRepository productRepository) {
+    public ProductsModel(IProductRepository productRepository, IWebHostEnvironment environment)
+    {
         _productRepository = productRepository;
+        _environment = environment;
     }
 
     public IEnumerable<Product>? Products;
     public int TotalProducts { get; set; }
     public int CurrentPage { get; set; }
-    public int PageSize { get; set; } = 10;
+    public int PageSize { get; set; } = 5;
 
     public async Task<IActionResult> OnGetAsync(int currentPage = 1)
     {
@@ -48,5 +51,20 @@ public class ProductsModel : PageModel {
     public IActionResult OnPostPage(int CurrentPage)
     {
         return RedirectToPage("/Products", new { CurrentPage });
+    }
+
+    public string GetImagePathForProductId(int productId)
+    {
+        var basePath = Path.Combine(_environment.WebRootPath, "imgs");
+        var searchPattern = $"product_{productId}.*";
+        var files = Directory.GetFiles(basePath, searchPattern);
+
+        if (files.Length > 0)
+        {
+            var fileName = Path.GetFileName(files[0]);
+            return $"/imgs/{fileName}";
+        }
+
+        return "error";
     }
 }

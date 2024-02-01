@@ -3,40 +3,43 @@
 
 <link rel="stylesheet" href="~/css/products.css" asp-append-version="true">
 
-<h1>Produtos</h1>
+<div class="productContainer">
+    <h1>Produtos</h1>
 
-@if (Model.Products != null)
-{
-    <div class="productsContainer">
-    @if (Model.Products.Count() == 0)
+    @if (Model.Products != null)
     {
-        <p>Não há produtos cadastrados.</p>
-    }
+        <div class="productsContainer">
+            @if (Model.Products.Count() == 0)
+            {
+                <p>Não existem produtos.</p>
+            }
 
-    @foreach (Product product in Model.Products)
-    {
-        <div class="Product">
-            <img src=@product.PicUrl alt=@product.Name />
-            <p>Name: @product.Name</p>
-            <a href=@product.PdfUrl target="_blank">PDF</a>
+            @foreach (Product product in Model.Products)
+            {
+                <div class="Product">
+                    <img src="@Url.Content(@Model.GetImagePathForProductId(product.Id))" alt="@product.Name" />
+                    <p>@product.Name</p>
+                    <a href="@Url.Content($"~/pdfs/product_{product.Id}.pdf")" target="_blank">PDF</a>
+                </div>
+            }
+        </div>
+
+        <div class="pagination">
+            <form method="post" asp-page="Products" asp-page-handler="Page">
+                <input type="hidden" name="CurrentPage" value="@(Model.CurrentPage - 1)" />
+                <input class="@(Model.CurrentPage <= 1 ? "invisible-btn" : "")" type="submit" value="<" />
+            </form>
+
+            @if (Model.TotalProducts != 0)
+            {
+                <span>Página @Model.CurrentPage</span>
+            }
+
+            <form method="post" asp-page="Products" asp-page-handler="Page">
+                <input type="hidden" name="CurrentPage" value="@(Model.CurrentPage + 1)" />
+                <input class="page-btn @(Model.CurrentPage * Model.PageSize >= Model.TotalProducts ? "invisible-btn" : "")" type="submit" value=">" />
+            </form>
         </div>
     }
-    </div>
 
-    <div class="pagination">
-        <form method="post" asp-page="Products" asp-page-handler="Page">
-            <input type="hidden" name="CurrentPage" value="@(Model.CurrentPage - 1)" />
-            <input class="@(Model.CurrentPage <= 1 ? "invisible-btn" : "")" type="submit" value="<" />
-        </form>
-
-        @if (Model.TotalProducts != 0)
-        {
-            <span>Página @Model.CurrentPage</span>
-        }
-
-        <form method="post" asp-page="Products" asp-page-handler="Page">
-            <input type="hidden" name="CurrentPage" value="@(Model.CurrentPage + 1)" />
-            <input class="page-btn @(Model.CurrentPage * Model.PageSize >= Model.TotalProducts ? "invisible-btn" : "")" type="submit" value=">" />
-        </form>
-    </div>
-}
+</div>
