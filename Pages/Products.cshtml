@@ -11,7 +11,7 @@
         <div class="productsContainer">
             @if (Model.Products.Count() == 0)
             {
-                <p>Não existem produtos.</p>
+                <p>NÃ£o existem produtos.</p>
             }
 
             @foreach (Product product in Model.Products)
@@ -32,7 +32,7 @@
 
             @if (Model.TotalProducts != 0)
             {
-                <span>Página @Model.CurrentPage</span>
+                <span>PÃ¡gina @Model.CurrentPage</span>
             }
 
             <form method="post" asp-page="Products" asp-page-handler="Page">

@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true">
 
 <div class="bigContainer">
-    <div class="callRequestContainer">
+    <div class="smallContainer">
         <h1>Pedidos de Contacto Não Vistos</h1>
 
         @if (Model.TotalUnseenAdminCallRequests == 0)
@@ -15,7 +15,7 @@
 
         @foreach (var item in Model.UnseenAdminCallRequests)
         {
-            <div class="callRequest">
+            <div class="smallContainerEntry">
                 <p>Nome: @item.Name</p>
                 @if (item.Company != null)
                 {
@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <div class="callRequestContainer">
+    <div class="smallContainer">
         <h1>Pedidos de Contacto Vistos</h1>
 
         @if (Model.TotalSeenAdminCallRequests == 0)
@@ -67,7 +67,7 @@
 
         @foreach (var item in Model.SeenAdminCallRequests)
         {
-            <div class="callRequest">
+            <div class="smallContainerEntry">
                 <p>Nome: @item.Name</p>
                 @if (item.Company != null)
                 {

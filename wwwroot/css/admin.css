@@ -4,7 +4,7 @@
     padding: 50px;
 }
 
-.callRequestContainer {
+.smallContainer {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -16,18 +16,18 @@
     margin: 50px;
 }
 
-.callRequestContainer h1 {
+.smallContainer h1 {
     color: #242e7d;
     margin-bottom: 15px;
 }
 
-.callRequest {
+.smallContainerEntry {
     border-top: 2px solid #eee;
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
-.callRequest p {
+.smallContainerEntry p {
     margin: 5px 0;
     line-height: 1.5;
 }
