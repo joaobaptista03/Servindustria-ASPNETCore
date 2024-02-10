@@ -192,3 +192,42 @@ input[type="submit"] {
 .invisible-btn {
     visibility: hidden;
 }
+
+.bigContainer {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.smallContainer {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 600px;
+    height: fit-content;
+    text-align: center;
+    margin: 50px;
+}
+
+.smallContainer h1 {
+    color: #242e7d;
+    margin-bottom: 15px;
+}
+
+.smallContainerEntry {
+    border-top: 2px solid #eee;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.smallContainerEntry p {
+    margin: 5px 0;
+    line-height: 1.5;
+}
+
+.smallContainerEntry a {
+    text-decoration: none;
+    color: #242e7d;
+}
