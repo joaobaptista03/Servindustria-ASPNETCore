@@ -75,7 +75,7 @@ namespace Servindustria.Pages
         public async Task<IActionResult> OnPostDeleteProductAsync(int id) {
             await _productRepository.DeleteProductAsync(id);
             
-            var imgPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imgs", "product_" + id.ToString() + getImageExtension(id));
+            var imgPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imgs", "product_" + id.ToString() + getProductImageExtension(id));
             var pdfPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/pdfs", "product_" + id.ToString() + ".pdf");
 
             if (System.IO.File.Exists(imgPath)) System.IO.File.Delete(imgPath);
@@ -93,7 +93,7 @@ namespace Servindustria.Pages
             return RedirectToPage("/AdminManageItems");
         }
 
-        private string getImageExtension(int id) {
+        private string getProductImageExtension(int id) {
             foreach (string file in Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imgs"))) {
                 string fileName = Path.GetFileName(file);
                 if (fileName.StartsWith("product_" + id.ToString())) {
