@@ -1,37 +1,18 @@
 @page "/tabelasTecnicas"
+@model TechnicalTablesModel
 
 <div class="bigContainer">
     <div class="smallContainer">
         <h1>Tabelas Técnicas</h1>
-        <div class="smallContainerEntry" style="padding-top: 20px;padding-bottom: 20px;">
-            <a href="~/pdfs/TabelaDeFlanges.pdf" target="_blank">Tabela de Flanges</a>
-        </div>
-        <div class="smallContainerEntry" style="padding-top: 20px;padding-bottom: 20px;">
-            <a href="~/pdfs/TabelaVaporSaturado.pdf" target="_blank">Tabela de Vapor Saturado</a>
-        </div>
-        <div class="smallContainerEntry" style="padding-top: 20px;padding-bottom: 20px;">
-            <a href="~/pdfs/TabelaIncompatibilidadeQuímica.pdf" target="_blank">Tabela de Incompatibilidade de Química</a>
-        </div>
-        <div class="smallContainerEntry" style="padding-top: 20px;padding-bottom: 20px;">
-            <a href="~/pdfs/CatálogoCompatibilidadeDeFluídos.pdf" target="_blank">Catálogo de Compatibilidade de Fluídos</a>
-        </div>
-        <div class="smallContainerEntry" style="padding-top: 20px;padding-bottom: 20px;">
-            <a href="~/pdfs/TabelaDeConversõesDeMedidas.pdf" target="_blank">Tabela de Conversões de Medidas</a>
-        </div>
-        <div class="smallContainerEntry" style="padding-top: 20px;padding-bottom: 20px;">
-            <a href="~/pdfs/TabelaDeRoscas.pdf" target="_blank">Tabela de Roscas</a>
-        </div>
-        <div class="smallContainerEntry" style="padding-top: 20px;padding-bottom: 20px;">
-            <a href="~/pdfs/TabelaAVK.pdf" target="_blank">Tabela AVK</a>
-        </div>
-        <div class="smallContainerEntry" style="padding-top: 20px;padding-bottom: 20px;">
-            <a href="~/pdfs/TabelaFucoli.pdf" target="_blank">Tabela Fucoli</a>
-        </div>
-        <div class="smallContainerEntry" style="padding-top: 20px;padding-bottom: 20px;">
-            <a href="~/pdfs/TabelaOliju.pdf" target="_blank">Tabela Oliju</a>
-        </div>
-        <div class="smallContainerEntry" style="padding-top: 20px;padding-bottom: 20px;">
-            <a href="~/pdfs/LinhaIrrigação.pdf" target="_blank">Linha Irrigação</a>
-        </div>
+
+        @if (Model.TechnicalTables.Count() == 0) {
+            <p>Não existem tabelas técnicas disponíveis.</p>
+        }
+
+        @foreach (TechnicalTable tb in Model.TechnicalTables) {
+            <div class="smallContainerEntry" style="padding-top: 20px;padding-bottom: 20px;">
+                <a href="@Url.Content($"~/pdfs/technicaltable_{tb.Id}.pdf")" target="_blank">@(tb.Name)</a>
+            </div>
+        }
     </div>
 </div>

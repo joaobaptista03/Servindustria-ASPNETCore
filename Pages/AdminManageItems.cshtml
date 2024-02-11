@@ -1,0 +1,124 @@
+﻿@page "/admin/gerirItems"
+@model ManageItemsModel
+
+<div class="bigContainer">
+    <div class="smallContainer">
+        <h1>Adicionar Produto</h1>
+
+        <form asp-page="AdminManageItems" asp-page-handler="AddProduct" method="post" enctype="multipart/form-data">
+            <div class="smallContainerEntry">
+                <input type="text" name="Name" placeholder="Nome do Produto"/>
+            </div>
+            <div class="smallContainerEntry">
+                <select name="Category">
+                    <option value="" disabled selected>Tipo de Produto</option>
+                    <option value="AcessorioAcoInoxLatãoGalvanizado_Cobre">Acessório Aço Inox / Latão / Galvanizado / Cobre</option>
+                    <option value="ActuadorPneumáticoEléctrico_Hidráulico">Actuador Pneumático / Eléctrico / Hidráulico</option>
+                    <option value="Bomba_Electrobomba">Bomba / Electrobomba</option>
+                    <option value="BorrachaEmFolha_Juntas">Borracha em Folha / Juntas</option>
+                    <option value="CartãoParaJuntasDeFlanges">Cartão para Juntas de Flanges</option>
+                    <option value="Compensador_JuntaDeDilatação">Compensador / Junta de Dilatação</option>
+                    <option value="ContadorRotámetroCaudalímetroDeÁguaOuVapor">Contador / Rotámetro / Caudalímetro de Água ou Vapor</option>
+                    <option value="ControladorDeTemperaturaPressãoCaudalENível">Controlador de Temperatura / Pressão / Caudal e Nível</option>
+                    <option value="ElectroVálvula">ElectroVálvula</option>
+                    <option value="EmpanqueDeCordão_Mecânico">Empanque de Cordão / Mecânico</option>
+                    <option value="EquipamentoConfecçãoTêxtil_Geradores_Caldeira_Ferro">Equipamento de Confecção Têxtil / Geradores / Caldeira / Ferro</option>
+                    <option value="EquipamentoDeÁguasResiduaisESaneamento">Equipamento de Águas Residuais e Saneamento</option>
+                    <option value="EquipamentoAvac">Equipamento Avac</option>
+                    <option value="EquipamentoDeGás">Equipamento de Gás</option>
+                    <option value="EquipamentoHidráulico">Equipamento Hidráulico</option>
+                    <option value="EquipamentoContraIncêndio">Equipamento Contra Incêndio</option>
+                    <option value="EquipamentoPneumático">Equipamento Pneumático</option>
+                    <option value="EquipamentoDePressãoCaudalENível">Equipamento de Pressão, Caudal e Nível</option>
+                    <option value="EquipamentoDeSegurança">Equipamento de Segurança</option>
+                    <option value="EquipamentoSolar">Equipamento Solar</option>
+                    <option value="FeltroComprimido_Junta">Feltro Comprimido / Junta</option>
+                    <option value="Filtro">Filtro</option>
+                    <option value="GatewayDeComunicaçãoParaAutomaçãoIndustrial">Gateway de Comunicação para Automação Industrial</option>
+                    <option value="Indicador_InterruptorMagnéticoDeNível">Indicador / Interruptor Magnético de Nível</option>
+                    <option value="Massa_SprayDeLubrificação">Massa / Spray de Lubrificação</option>
+                    <option value="PlásticoTécnico">Plástico Técnico</option>
+                    <option value="Pressostato_Termostato_TransmissorDePressão">Pressostato / Termostato / Transmissor de Pressão</option>
+                    <option value="PurgadorDeVapor">Purgador de Vapor</option>
+                    <option value="SensorElectrónico">Sensor Electrónico</option>
+                    <option value="SondaDeTemperaturaNívelPressãoECaudal">Sonda de Temperatura / Nível / Pressão e Caudal</option>
+                    <option value="TermómetroManómetroHigrómetro">Termómetro / Manómetro / Higrómetro</option>
+                    <option value="VálvulaDeAgulha">Válvula de Agulha</option>
+                    <option value="VálvulaDeCunha">Válvula de Cunha</option>
+                    <option value="VálvulaDeDescargaDaCaldeira">Válvula de Descarga da Caldeira</option>
+                    <option value="VálvulaEléctrica">Válvula Eléctrica</option>
+                    <option value="VálvulaDeFoleDuplo">Válvula de Fole Duplo</option>
+                    <option value="VálvulaDeGlobo">Válvula de Globo</option>
+                    <option value="VálvulaDePistão">Válvula de Pistão</option>
+                    <option value="VálvulaPneumática">Válvula Pneumática</option>
+                    <option value="VálvulaDeReduçãoDePressão">Válvula de Redução de Pressão</option>
+                    <option value="VálvulaDeRetenção">Válvula de Retenção</option>
+                    <option value="VálvulaDeSegurança">Válvula de Segurança</option>
+                    <option value="VidroTemperadoBorossilicatoVisorFluxo">Vidro Temperado / Borossilicato / Visor Fluxo</option>
+                    <option value="VidroDeReflexãoTorneiraDeNível">Vidro de Reflexão / Torneira de Nível</option>
+                </select>
+            </div>
+            <div class="smallContainerEntry">
+                <h2>Imagem</h2>
+                <input type="file" name="ImageFile" accept="image/*" placeholder="Imagem"/>
+            </div>
+            <div class="smallContainerEntry">
+                <h2>PDF</h2>
+                <input type="file" name="PdfFile" accept=".pdf" placeholder="PDF"/>
+            </div>
+
+            <input type="submit" value="Adicionar" />
+        </form>
+    </div>
+
+    <div class="smallContainer">
+        <h1>Adicionar Tabela Técnica</h1>
+        
+        <form asp-page="AdminManageItems" asp-page-handler="AddTechnicalTable" method="post" enctype="multipart/form-data">
+            <div class="smallContainerEntry">
+                <input type="text" name="Name" placeholder="Nome da Tabela"/>
+            </div>
+            <div class="smallContainerEntry">
+                <input type="file" name="PdfFile" accept=".pdf" placeholder="PDF"/>
+            </div>
+
+            <input type="submit" value="Adicionar" />
+        </form>
+    </div>
+</div>
+
+<div class="bigContainer">
+    <div class="smallContainer">
+        <h1>Remover Produto</h1>
+
+        <form asp-page="AdminManageItems" asp-page-handler="DeleteProduct" method="post">
+            <div class="smallContainerEntry">
+                <select name="id">
+                    <option value="" disabled selected>Produto</option>
+                    @foreach (var product in Model.Products) {
+                        <option value="@product.Id">@product.Name</option>
+                    }
+                </select>
+            </div>
+
+            <input type="submit" value="Remover" />
+        </form>
+    </div>
+
+    <div class="smallContainer">
+        <h1>Remover Tabela Técnica</h1>
+
+        <form asp-page="AdminManageItems" asp-page-handler="DeleteTechnicalTable" method="post">
+            <div class="smallContainerEntry">
+                <select name="id">
+                    <option value="" disabled selected>Tabela Técnica</option>
+                    @foreach (var technicalTable in Model.TechnicalTables) {
+                        <option value="@technicalTable.Id">@technicalTable.Name</option>
+                    }
+                </select>
+            </div>
+
+            <input type="submit" value="Remover" />
+        </form>
+    </div>
+</div>

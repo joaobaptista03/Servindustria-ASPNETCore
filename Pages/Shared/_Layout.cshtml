@@ -45,8 +45,8 @@
                     <li class="@(currentPage.EndsWith("/admin/pedidosContacto") ? "currentPage" : "exit-trigger")">
                         <a asp-page="AdminCallRequests">Pedidos de Contacto</a>
                     </li>
-                <li class="@(currentPage.EndsWith("/admin/adicionarProduto") ? "currentPage" : "exit-trigger")">
-                    <a asp-page="AdminAddProduct">Adicionar Produto</a>
+                <li class="@(currentPage.EndsWith("/admin/gerirItems") ? "currentPage" : "exit-trigger")">
+                    <a asp-page="AdminManageItems">Gerir Items</a>
                 </li>
                 } else {
                     <li class="@(currentPage.EndsWith("/produtos") ? "currentPage" : "exit-trigger")">
@@ -75,6 +75,7 @@
                 }
             </ul>
         </header>
+        
         @if (!isAdmin) {
             <div id="movableContainer" style="@(!currentPage.EndsWith("/") ? "transform: translate(50px, 150px);" : "")">
                 <img src="~/imgs/phone.png" alt="Ligue-me" id="movablePhone"/>
@@ -95,6 +96,7 @@
                 </div>
             </div>
         }
+
         <main>
             @RenderBody()
         </main>
