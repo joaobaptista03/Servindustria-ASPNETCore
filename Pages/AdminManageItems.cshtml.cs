@@ -19,17 +19,6 @@ namespace Servindustria.Pages
         public IEnumerable<Product> Products { get; set; } = new List<Product>();
         public IEnumerable<TechnicalTable> TechnicalTables { get; set; } = new List<TechnicalTable>();
 
-        [BindProperty]
-        public Product? Product { get; set; } = new Product();
-        [BindProperty]
-        public IFormFile? ImageFile { get; set; }
-
-        [BindProperty]
-        public TechnicalTable? TechnicalTable { get; set; } = new TechnicalTable();
-
-        [BindProperty]
-        public IFormFile? PdfFile { get; set; }
-
         public async Task<IActionResult> OnGetAsync()
         {
             if (User.Identity == null || !User.Identity.IsAuthenticated) return RedirectToPage("/Authentication");
@@ -40,7 +29,7 @@ namespace Servindustria.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAddProductAsync() {
+        public async Task<IActionResult> OnPostAddProductAsync(Product? Product = null, IFormFile? ImageFile = null, IFormFile? PdfFile = null) {
             if (!ModelState.IsValid || Product == null || ImageFile == null || PdfFile == null) return Page();
 
             await _productRepository.AddProductAsync(Product);
@@ -66,7 +55,7 @@ namespace Servindustria.Pages
             return RedirectToPage("/AdminManageItems");
         }
 
-        public async Task<IActionResult> OnPostAddTechnicalTableAsync() {
+        public async Task<IActionResult> OnPostAddTechnicalTableAsync(TechnicalTable? TechnicalTable = null, IFormFile? PdfFile = null) {
             if (!ModelState.IsValid || TechnicalTable == null || PdfFile == null) return Page();
 
             await _technicalTableRepository.AddTechnicalTableAsync(TechnicalTable);
