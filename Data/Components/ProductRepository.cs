@@ -31,6 +31,11 @@ namespace Servindustria.Data.Components
             return await _context.Products.ToListAsync();
         }
 
+        public async Task<Product> GetProductByIdAsync(int id)
+        {
+            return await _context.Products.FindAsync(id);
+        }
+
         public async Task AddProductAsync(Product product)
         {
             await _context.Products.AddAsync(product);

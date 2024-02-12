@@ -40,7 +40,7 @@ header ul li a /* EACH MENU OPTION */ {
     transition: all 0.2s ease;
     font-family: Courier;
     font-size: 16px;
-    display: inline-block; /* Changed to inline-block for better control */
+    display: inline-block;
     padding: 5px 10px;
 }
 
@@ -196,7 +196,6 @@ input[type="submit"] {
 .bigContainer {
     display: flex;
     justify-content: center;
-    padding: 50px;
 }
 
 .smallContainer {

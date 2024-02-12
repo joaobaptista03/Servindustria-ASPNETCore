@@ -9,15 +9,18 @@ namespace Servindustria.Pages
     {
         private readonly IProductRepository _productRepository;
         private readonly ITechnicalTableRepository _technicalTableRepository;
+        private readonly IProductCategoryRepository _productCategoryRepository;
 
-        public ManageItemsModel(IProductRepository productRepository, ITechnicalTableRepository technicalTableRepository)
+        public ManageItemsModel(IProductRepository productRepository, ITechnicalTableRepository technicalTableRepository, IProductCategoryRepository productCategoryRepository)
         {
             _productRepository = productRepository;
             _technicalTableRepository = technicalTableRepository;
+            _productCategoryRepository = productCategoryRepository;
         }
 
         public IEnumerable<Product> Products { get; set; } = new List<Product>();
         public IEnumerable<TechnicalTable> TechnicalTables { get; set; } = new List<TechnicalTable>();
+        public IEnumerable<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -25,12 +28,17 @@ namespace Servindustria.Pages
             if (!User.IsInRole("Admin")) return RedirectToPage("/Index");
             Products = await _productRepository.GetAllProductsAsync();
             TechnicalTables = await _technicalTableRepository.GetTechnicalTablesAsync();
+            ProductCategories = await _productCategoryRepository.GetProductCategoriesAsync();
 
             return Page();
         }
 
         public async Task<IActionResult> OnPostAddProductAsync(Product? Product = null, IFormFile? ImageFile = null, IFormFile? PdfFile = null) {
             if (!ModelState.IsValid || Product == null || ImageFile == null || PdfFile == null) return Page();
+
+            ProductCategory category = await _productCategoryRepository.GetProductCategoryByIdAsync(Product.CategoryId);
+            if (category == null) return Page();
+            Product.Category = category;
 
             await _productRepository.AddProductAsync(Product);
             var imgPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imgs", "product_" + Product.Id.ToString() + Path.GetExtension(ImageFile.FileName));
@@ -102,6 +110,18 @@ namespace Servindustria.Pages
             }
 
             return "";
+        }
+
+        public async Task<IActionResult> OnPostAddProductCategoryAsync(ProductCategory? ProductCategory = null) {
+            if (!ModelState.IsValid || ProductCategory == null) return Page();
+
+            await _productCategoryRepository.AddProductCategoryAsync(ProductCategory);
+            return RedirectToPage("/AdminManageItems");
+        }
+
+        public async Task<IActionResult> OnPostDeleteProductCategoryAsync(int id) {
+            await _productCategoryRepository.DeleteProductCategoryAsync(id);
+            return RedirectToPage("/AdminManageItems");
         }
     }
 }
