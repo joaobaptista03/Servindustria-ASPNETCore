@@ -36,7 +36,7 @@ namespace Servindustria.Pages
         public async Task<IActionResult> OnPostAddProductAsync(Product? Product = null, IFormFile? ImageFile = null, IFormFile? PdfFile = null) {
             if (!ModelState.IsValid || Product == null || ImageFile == null || PdfFile == null) return Page();
 
-            ProductCategory category = await _productCategoryRepository.GetProductCategoryByIdAsync(Product.CategoryId);
+            ProductCategory? category = await _productCategoryRepository.GetProductCategoryByIdAsync(Product.CategoryId);
             if (category == null) return Page();
             Product.Category = category;
 

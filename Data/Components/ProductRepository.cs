@@ -14,14 +14,39 @@ namespace Servindustria.Data.Components
             _context = context;
         }
 
-        public async Task<(IEnumerable<Product> products, int totalCount)> GetProductsAsync(int currentPage, int pageSize)
+        public async Task<(IEnumerable<Product> products, int totalCount)> GetProductsAsync(int currentPage, int pageSize, string search, int filter)
         {
-            var products = _context.Products
-                .OrderBy(p => p.Name)
-                .Skip((currentPage - 1) * pageSize)
-                .Take(pageSize);
+            IQueryable<Product> products;
+            int totalCount;
 
-            int totalCount = _context.Products.Count();
+            if (search == string.Empty && filter == -1) {
+                products = _context.Products
+                    .OrderBy(p => p.Name)
+                    .Skip((currentPage - 1) * pageSize)
+                    .Take(pageSize);
+                totalCount = _context.Products.Count();
+            } else if (search != string.Empty && filter == -1) {
+                products = _context.Products
+                    .Where(p => p.Name.Contains(search))
+                    .OrderBy(p => p.Name)
+                    .Skip((currentPage - 1) * pageSize)
+                    .Take(pageSize);
+                totalCount = _context.Products.Count(p => p.Name.Contains(search));
+            } else if (search == string.Empty && filter != -1) {
+                products = _context.Products
+                    .Where(p => p.CategoryId == filter)
+                    .OrderBy(p => p.Name)
+                    .Skip((currentPage - 1) * pageSize)
+                    .Take(pageSize);
+                totalCount = _context.Products.Count(p => p.CategoryId == filter);
+            } else {
+                products = _context.Products
+                    .Where(p => p.Name.Contains(search) && p.CategoryId == filter)
+                    .OrderBy(p => p.Name)
+                    .Skip((currentPage - 1) * pageSize)
+                    .Take(pageSize);
+                totalCount = _context.Products.Count(p => p.Name.Contains(search) && p.CategoryId == filter);
+            }
 
             return (await products.ToListAsync(), totalCount);
         }
@@ -31,7 +56,7 @@ namespace Servindustria.Data.Components
             return await _context.Products.ToListAsync();
         }
 
-        public async Task<Product> GetProductByIdAsync(int id)
+        public async Task<Product?> GetProductByIdAsync(int id)
         {
             return await _context.Products.FindAsync(id);
         }
