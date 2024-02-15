@@ -31,11 +31,12 @@ public class ProductCategoryRepository : IProductCategoryRepository {
         return productCategory;
     }
 
-    public async Task DeleteProductCategoryAsync(int id) {
+    public async Task<bool> DeleteProductCategoryAsync(int id) {
         var productCategory = await _context.ProductCategories.FindAsync(id);
-        if (productCategory == null) return;
+        if (productCategory == null || await _context.Products.AnyAsync(p => p.CategoryId == id)) return false;
 
         _context.ProductCategories.Remove(productCategory);
         await _context.SaveChangesAsync();
+        return true;
     }
 }

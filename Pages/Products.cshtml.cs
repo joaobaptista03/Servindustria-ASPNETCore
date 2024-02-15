@@ -40,9 +40,13 @@ public class ProductsModel : PageModel {
         }
 
         ProductCategories = await _productCategoryRepository.GetProductCategoriesAsync();
-        if (Filter != -1)
-        {
-            FilterName = (await _productCategoryRepository.GetProductCategoryByIdAsync(Filter)).Name;
+        if (Filter != -1) {
+            ProductCategory? category = await _productCategoryRepository.GetProductCategoryByIdAsync(Filter);
+            if (category != null) FilterName = category.Name;
+            else {
+                Filter = -1;
+                FilterName = "Todos";
+            }
         }
 
         var products = await _productRepository.GetProductsAsync(CurrentPage, PageSize, Search, Filter);

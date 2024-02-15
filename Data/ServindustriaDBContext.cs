@@ -13,9 +13,9 @@ public class ServindustriaDBContext : DbContext {
     public DbSet<ProductCategory> ProductCategories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
-        modelBuilder.Entity<ProductCategory>()
-            .HasMany(pc => pc.Products)
-            .WithOne(p => p.Category)
+        modelBuilder.Entity<Product>()
+            .HasOne(p => p.Category)
+            .WithMany()
             .HasForeignKey(p => p.CategoryId)
             .IsRequired()
             .OnDelete(DeleteBehavior.Restrict);

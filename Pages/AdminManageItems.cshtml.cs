@@ -60,6 +60,7 @@ namespace Servindustria.Pages
                 }
             }
 
+            TempData["SuccessMessage"] = "Produto adicionado com sucesso.";
             return RedirectToPage("/AdminManageItems");
         }
 
@@ -77,6 +78,7 @@ namespace Servindustria.Pages
                 }
             }
 
+            TempData["SuccessMessage"] = "Tabela técnica adicionada com sucesso.";
             return RedirectToPage("/AdminManageItems");
         }
 
@@ -89,6 +91,7 @@ namespace Servindustria.Pages
             if (System.IO.File.Exists(imgPath)) System.IO.File.Delete(imgPath);
             if (System.IO.File.Exists(pdfPath)) System.IO.File.Delete(pdfPath);
 
+            TempData["SuccessMessage"] = "Produto eliminado com sucesso.";
             return RedirectToPage("/AdminManageItems");
         }
 
@@ -98,6 +101,7 @@ namespace Servindustria.Pages
             var pdfPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/pdfs", "technicaltable_" + id.ToString() + ".pdf");
             if (System.IO.File.Exists(pdfPath)) System.IO.File.Delete(pdfPath);
 
+            TempData["SuccessMessage"] = "Tabela técnica eliminada com sucesso.";
             return RedirectToPage("/AdminManageItems");
         }
 
@@ -116,11 +120,18 @@ namespace Servindustria.Pages
             if (!ModelState.IsValid || ProductCategory == null) return Page();
 
             await _productCategoryRepository.AddProductCategoryAsync(ProductCategory);
+            TempData["SuccessMessage"] = "Categoria de produto adicionada com sucesso.";
             return RedirectToPage("/AdminManageItems");
         }
 
         public async Task<IActionResult> OnPostDeleteProductCategoryAsync(int id) {
-            await _productCategoryRepository.DeleteProductCategoryAsync(id);
+            bool result = await _productCategoryRepository.DeleteProductCategoryAsync(id);
+            if (!result) {
+                TempData["ErrorMessage"] = "Não pode eliminar uma categoria de produto enquanto houver produtos associados a ela.";
+            }
+            else {
+                TempData["SuccessMessage"] = "Categoria de produto eliminada com sucesso.";
+            }
             return RedirectToPage("/AdminManageItems");
         }
     }

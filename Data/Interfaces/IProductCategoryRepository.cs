@@ -6,5 +6,5 @@ public interface IProductCategoryRepository {
     Task<ProductCategory?> GetProductCategoryByIdAsync(int id);
     Task<ProductCategory> AddProductCategoryAsync(ProductCategory productCategory);
     Task<ProductCategory> UpdateProductCategoryAsync(ProductCategory productCategory);
-    Task DeleteProductCategoryAsync(int id);
+    Task<bool> DeleteProductCategoryAsync(int id);
 }
