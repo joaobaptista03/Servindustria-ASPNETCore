@@ -34,13 +34,13 @@
     </div>
 
     <div class="smallContainer">
-        <h1>Remover Tabela Técnica</h1>
+        <h1>Remover Tabela / Catálogo</h1>
 
-        <form asp-page="AdminManageItems" asp-page-handler="DeleteTechnicalTable" method="post">
+        <form asp-page="AdminManageItems" asp-page-handler="DeleteTechnicalTableOrCatalog" method="post">
             <div class="smallContainerEntry">
                 <select name="id" required>
-                    <option value="" disabled selected>Tabela Técnica</option>
-                    @foreach (var technicalTable in Model.TechnicalTables) {
+                    <option value="" disabled selected>Tabela Técnica / Catálogo</option>
+                    @foreach (var technicalTable in Model.TechnicalTableOrCatalogs) {
                         <option value="@technicalTable.Id">@technicalTable.Name</option>
                     }
                 </select>
@@ -98,11 +98,11 @@
     </div>
 
     <div class="smallContainer">
-        <h1>Adicionar Tabela Técnica</h1>
+        <h1>Adicionar Tabela / Catálogo</h1>
         
-        <form asp-page="AdminManageItems" asp-page-handler="AddTechnicalTable" method="post" enctype="multipart/form-data">
+        <form asp-page="AdminManageItems" asp-page-handler="AddTechnicalTableOrCatalog" method="post" enctype="multipart/form-data">
             <div class="smallContainerEntry">
-                <input type="text" name="Name" placeholder="Nome da Tabela" required/>
+                <input type="text" name="Name" placeholder="Nome da Tabela / Catálogo" required/>
             </div>
             <div class="smallContainerEntry">
                 <input type="file" name="PdfFile" accept=".pdf" placeholder="PDF" required/>

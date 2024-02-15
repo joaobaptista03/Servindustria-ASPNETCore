@@ -3,12 +3,12 @@
 
 <div class="bigContainer">
     <div class="smallContainer">
-        <h1>Pedidos de Contacto Não Vistos</h1>
+        <h1>Pedidos de Chamada Não Vistos</h1>
 
         @if (Model.TotalUnseenAdminCallRequests == 0)
         {
             <br>
-            <p>Já viu todos os pedidos de contacto!</p>
+            <p>Já viu todos os pedidos de chamada!</p>
         }
 
         @foreach (var item in Model.UnseenAdminCallRequests)
@@ -55,12 +55,12 @@
     </div>
 
     <div class="smallContainer">
-        <h1>Pedidos de Contacto Vistos</h1>
+        <h1>Pedidos de Chamada Vistos</h1>
 
         @if (Model.TotalSeenAdminCallRequests == 0)
         {
             <br>
-            <p>Não existem pedidos de contacto vistos!</p>
+            <p>Não existem pedidos de chamada vistos!</p>
         }
 
         @foreach (var item in Model.SeenAdminCallRequests)

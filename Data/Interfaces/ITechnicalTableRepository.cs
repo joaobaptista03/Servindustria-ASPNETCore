@@ -1,8 +1,8 @@
 using Servindustria.Models;
 namespace Servindustria.Data.Interfaces;
 
-public interface ITechnicalTableRepository {
-    Task<IEnumerable<TechnicalTable>> GetTechnicalTablesAsync();
-    Task DeleteTechnicalTableAsync(int id);
-    Task AddTechnicalTableAsync(TechnicalTable technicalTable);
+public interface ITechnicalTableOrCatalogRepository {
+    Task<IEnumerable<TechnicalTableOrCatalog>> GetTechnicalTableOrCatalogsAsync();
+    Task DeleteTechnicalTableOrCatalogAsync(int id);
+    Task AddTechnicalTableOrCatalogAsync(TechnicalTableOrCatalog technicalTable);
 }

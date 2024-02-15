@@ -3,26 +3,26 @@ using Servindustria.Data.Interfaces;
 using Servindustria.Models;
 
 namespace Servindustria.Data.Components {
-    public class TechnicalTableRepository : ITechnicalTableRepository {
+    public class TechnicalTableOrCatalogRepository : ITechnicalTableOrCatalogRepository {
         private readonly ServindustriaDBContext _context;
 
-        public TechnicalTableRepository(ServindustriaDBContext context) {
+        public TechnicalTableOrCatalogRepository(ServindustriaDBContext context) {
             _context = context;
         }
 
-        public async Task<IEnumerable<TechnicalTable>> GetTechnicalTablesAsync() {
-            return await _context.TechnicalTables.ToListAsync();
+        public async Task<IEnumerable<TechnicalTableOrCatalog>> GetTechnicalTableOrCatalogsAsync() {
+            return await _context.TechnicalTableOrCatalogs.ToListAsync();
         }
 
-        public async Task DeleteTechnicalTableAsync(int id) {
-            var technicalTable = await _context.TechnicalTables.FindAsync(id);
+        public async Task DeleteTechnicalTableOrCatalogAsync(int id) {
+            var technicalTable = await _context.TechnicalTableOrCatalogs.FindAsync(id);
             if (technicalTable == null) return;
-            _context.TechnicalTables.Remove(technicalTable);
+            _context.TechnicalTableOrCatalogs.Remove(technicalTable);
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddTechnicalTableAsync(TechnicalTable technicalTable) {
-            _context.TechnicalTables.Add(technicalTable);
+        public async Task AddTechnicalTableOrCatalogAsync(TechnicalTableOrCatalog technicalTable) {
+            _context.TechnicalTableOrCatalogs.Add(technicalTable);
             await _context.SaveChangesAsync();
         }
     }

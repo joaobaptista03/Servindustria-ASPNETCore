@@ -1,15 +1,15 @@
 @page "/tabelasTecnicas"
-@model TechnicalTablesModel
+@model TechnicalTableOrCatalogsModel
 
 <div class="bigContainer">
     <div class="smallContainer">
-        <h1>Tabelas Técnicas</h1>
+        <h1>Tabelas Técnicas / Catálogos</h1>
 
-        @if (Model.TechnicalTables.Count() == 0) {
-            <p>Não existem tabelas técnicas disponíveis.</p>
+        @if (Model.TechnicalTableOrCatalogs.Count() == 0) {
+            <p>Não existem tabelas técnicas nem catálogos disponíveis.</p>
         }
 
-        @foreach (TechnicalTable tb in Model.TechnicalTables) {
+        @foreach (TechnicalTableOrCatalog tb in Model.TechnicalTableOrCatalogs) {
             <div class="smallContainerEntry" style="padding-top: 20px;padding-bottom: 20px;">
                 <a href="@Url.Content($"~/pdfs/technicaltable_{tb.Id}.pdf")" target="_blank">@(tb.Name)</a>
             </div>

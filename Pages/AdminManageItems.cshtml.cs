@@ -8,10 +8,10 @@ namespace Servindustria.Pages
     public class ManageItemsModel : PageModel
     {
         private readonly IProductRepository _productRepository;
-        private readonly ITechnicalTableRepository _technicalTableRepository;
+        private readonly ITechnicalTableOrCatalogRepository _technicalTableRepository;
         private readonly IProductCategoryRepository _productCategoryRepository;
 
-        public ManageItemsModel(IProductRepository productRepository, ITechnicalTableRepository technicalTableRepository, IProductCategoryRepository productCategoryRepository)
+        public ManageItemsModel(IProductRepository productRepository, ITechnicalTableOrCatalogRepository technicalTableRepository, IProductCategoryRepository productCategoryRepository)
         {
             _productRepository = productRepository;
             _technicalTableRepository = technicalTableRepository;
@@ -19,7 +19,7 @@ namespace Servindustria.Pages
         }
 
         public IEnumerable<Product> Products { get; set; } = new List<Product>();
-        public IEnumerable<TechnicalTable> TechnicalTables { get; set; } = new List<TechnicalTable>();
+        public IEnumerable<TechnicalTableOrCatalog> TechnicalTableOrCatalogs { get; set; } = new List<TechnicalTableOrCatalog>();
         public IEnumerable<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
 
         public async Task<IActionResult> OnGetAsync()
@@ -27,7 +27,7 @@ namespace Servindustria.Pages
             if (User.Identity == null || !User.Identity.IsAuthenticated) return RedirectToPage("/Authentication");
             if (!User.IsInRole("Admin")) return RedirectToPage("/Index");
             Products = await _productRepository.GetAllProductsAsync();
-            TechnicalTables = await _technicalTableRepository.GetTechnicalTablesAsync();
+            TechnicalTableOrCatalogs = await _technicalTableRepository.GetTechnicalTableOrCatalogsAsync();
             ProductCategories = await _productCategoryRepository.GetProductCategoriesAsync();
 
             return Page();
@@ -64,11 +64,11 @@ namespace Servindustria.Pages
             return RedirectToPage("/AdminManageItems");
         }
 
-        public async Task<IActionResult> OnPostAddTechnicalTableAsync(TechnicalTable? TechnicalTable = null, IFormFile? PdfFile = null) {
-            if (!ModelState.IsValid || TechnicalTable == null || PdfFile == null) return Page();
+        public async Task<IActionResult> OnPostAddTechnicalTableOrCatalogAsync(TechnicalTableOrCatalog? TechnicalTableOrCatalog = null, IFormFile? PdfFile = null) {
+            if (!ModelState.IsValid || TechnicalTableOrCatalog == null || PdfFile == null) return Page();
 
-            await _technicalTableRepository.AddTechnicalTableAsync(TechnicalTable);
-            var pdfPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/pdfs", "technicaltable_" + TechnicalTable.Id.ToString() + Path.GetExtension(PdfFile.FileName));
+            await _technicalTableRepository.AddTechnicalTableOrCatalogAsync(TechnicalTableOrCatalog);
+            var pdfPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/pdfs", "technicaltable_" + TechnicalTableOrCatalog.Id.ToString() + Path.GetExtension(PdfFile.FileName));
 
             if (PdfFile != null)
             {
@@ -95,8 +95,8 @@ namespace Servindustria.Pages
             return RedirectToPage("/AdminManageItems");
         }
 
-        public async Task<IActionResult> OnPostDeleteTechnicalTableAsync(int id) {
-            await _technicalTableRepository.DeleteTechnicalTableAsync(id);
+        public async Task<IActionResult> OnPostDeleteTechnicalTableOrCatalogAsync(int id) {
+            await _technicalTableRepository.DeleteTechnicalTableOrCatalogAsync(id);
 
             var pdfPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/pdfs", "technicaltable_" + id.ToString() + ".pdf");
             if (System.IO.File.Exists(pdfPath)) System.IO.File.Delete(pdfPath);
