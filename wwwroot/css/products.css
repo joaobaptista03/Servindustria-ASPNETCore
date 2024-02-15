@@ -51,3 +51,14 @@
 .pagination span {
     padding-top: 3%;
 }
+
+.SearchAndFilter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    grid-column-gap: 500px;
+}
+
+.SearchAndFilter input, select {
+    margin: 0;
+}

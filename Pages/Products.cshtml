@@ -6,28 +6,30 @@
 <div class="productContainer">
     <h1>Produtos</h1>
 
-    <form method="post" asp-page="Products" asp-page-handler="Search">
-        <input type="text" name="search" value="@Model.Search" placeholder="Procurar por Nome"/>
-        <input type="hidden" name="filter" value="@Model.Filter" />
-        <input type="submit" value="Pesquisar" />
-    </form>
+    <div class="SearchAndFilter">
+        <form method="post" asp-page="Products" asp-page-handler="Search">
+            <input type="text" name="search" value="@Model.Search" placeholder="Procurar por Nome"/>
+            <input type="hidden" name="filter" value="@Model.Filter" />
+            <input type="submit" value="Pesquisar" />
+        </form>
 
-    <form method="post" asp-page="Products" asp-page-handler="Filter">
-        <select name="filter">
-            <option value=-1>Todas as Categorias</option>
-            @foreach (ProductCategory category in Model.ProductCategories)
-            {
-                @if (category.Id == Model.Filter)
+        <form method="post" asp-page="Products" asp-page-handler="Filter">
+            <select name="filter">
+                <option value=-1>Todas as Categorias</option>
+                @foreach (ProductCategory category in Model.ProductCategories)
                 {
-                    <option value=@category.Id selected>@category.Name</option>
-                } else {
-                    <option value=@category.Id>@category.Name</option>
+                    @if (category.Id == Model.Filter)
+                    {
+                        <option value=@category.Id selected>@category.Name</option>
+                    } else {
+                        <option value=@category.Id>@category.Name</option>
+                    }
                 }
-            }
-        </select>
-        <input type="hidden" name="search" value="@Model.Search" />
-        <input type="submit" value="Filtrar" />
-    </form>
+            </select>
+            <input type="hidden" name="search" value="@Model.Search" />
+            <input type="submit" value="Filtrar" />
+        </form>
+    </div>
 
     @if (Model.Products != null)
     {
