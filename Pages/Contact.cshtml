@@ -22,6 +22,23 @@
     
     <div class="smallContainer">
         <h2>Localização</h2>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d746.5881162905087!2d-8.617016971460512!3d41.53996510200568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd24524b2cc2e5e9%3A0x1821d9fa8e7aad23!2sServindustria-%20V%C3%A1lvulas%20Industriais!5e0!3m2!1spt-PT!2spt!4v1708013515880!5m2!1spt-PT!2spt" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d746.5881162905087!2d-8.617016971460512!3d41.53996510200568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd24524b2cc2e5e9%3A0x1821d9fa8e7aad23!2sServindustria-%20V%C3%A1lvulas%20Industriais!5e0!3m2!1spt-PT!2spt!4v1708013515880!5m2!1spt-PT!2spt" width="600" height="387" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</div>
+
+<div class="bigContainer">
+    <div class="smallContainer">
+        <h2>Formulário de Contacto</h2>
+        <div id="contact-error" class="error"></div>
+        <div id="contact-success" class="success"></div>
+        <form id="contact-form" class="formClass" method="post" asp-page="/Contact" asp-page-handler="AdminContactForm">
+            @Html.AntiForgeryToken()
+            <input type="text" name="Name" placeholder="Nome" required/>
+            <input type="text" name="Company" placeholder="Empresa (opcional)"/>
+            <input type="number" name="Phone" placeholder="Nº Telefone / Telemóvel (opcional)" />
+            <input type="text" name="Email" placeholder="Email" required/>
+            <textarea name="Message" placeholder="Mensagem" cols="40" rows="5" required></textarea>
+            <input type="submit" value="Enviar"/>
+        </form>
     </div>
 </div>

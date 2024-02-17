@@ -109,6 +109,7 @@ header ul li a:hover /* HOVER OF EACH MENU OPTION */ {
     width: 230px;
     border: 1px solid black;
     border-radius: 15px;
+    background-color: white;
 }
 
 /* -------------------------------------------- FOOTER -------------------------------------------- */
@@ -136,20 +137,21 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
 }
 
-input, select {
+input, select, textarea {
     margin: 5px;
     padding: 5px;
     border: 1px solid #242e7d;
     border-radius: 5px;
+    width: 220px;
 }
 
-input:focus, select:focus {
+input:focus, select:focus, textarea:focus{
     outline: none;
     border: 1px solid #242e7d;
     box-shadow: 0px 0px 5px #242e7d
 }
 
-input::placeholder, select::selection {
+input::placeholder, select::selection, textarea::placeholder {
     text-align: center;
 }
 
@@ -158,6 +160,7 @@ input[type="submit"] {
     color: white;
     padding: 5px 10px;
     cursor: pointer;
+    width: auto;
 }
 
 .error {

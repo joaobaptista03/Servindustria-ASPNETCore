@@ -8,6 +8,7 @@ public class ServindustriaDBContext : DbContext {
     
     public DbSet<User> Users { get; set; }
     public DbSet<AdminCallRequest> AdminCallRequests { get; set; }
+    public DbSet<AdminContactForm> ContactForms { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<TechnicalTableOrCatalog> TechnicalTableOrCatalogs { get; set; }
     public DbSet<ProductCategory> ProductCategories { get; set; }

@@ -1,7 +1,7 @@
 .logo {
     display: grid;
     place-items: center;
-    height: 77vh;
+    height: 60vh;
 }
 
 .logo img {
@@ -23,11 +23,11 @@
 }
 
 .left-content {
-    margin-left: 200px;
+    margin-left: 150px;
 }
 
 .right-content {
-    margin-right: 200px;
+    margin-right: 150px;
 }
 
 h1 {

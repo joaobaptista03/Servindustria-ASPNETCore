@@ -51,3 +51,31 @@ $('#callRequest-form').off('submit').on('submit', function(event) {
         }
     });
 });
+
+/* CONTACT FORM SUBMIT */
+$('#contact-form').off('submit').on('submit', function(event) {
+    event.preventDefault();
+
+    $.ajax({
+        type: this.method,
+        url: this.action,
+        data: $(this).serialize(),
+        success: function(response) {
+            if (!response.success) {
+                $('#contact-success').hide();
+                $('#contact-error').html(response.error).show();
+            } else {
+                $('#contact-error').hide();
+                $('#contact-success').html('Pedido registado. Iremos responder logo que possível!').show();
+                window.setTimeout(function() {
+                    $('#contact-success').hide();
+                    document.getElementById('popupBox').classList.remove('popup-visible');
+                }, 2000);
+            }
+        },
+        error: function() {
+            $('#contact-success').hide();
+            $('#contact-error').html('An error occurred.').show();
+        }
+    });
+});
