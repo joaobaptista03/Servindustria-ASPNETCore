@@ -34,7 +34,9 @@ namespace Servindustria.Pages
         }
 
         public async Task<IActionResult> OnPostAddProductAsync(Product? Product = null, IFormFile? ImageFile = null, IFormFile? PdfFile = null) {
-            if (!ModelState.IsValid || Product == null || ImageFile == null || PdfFile == null) return Page();
+            if (!User.IsInRole("Admin")) return RedirectToPage("/Authentication");
+            if (!ModelState.IsValid || Product == null || ImageFile == null || PdfFile == null) return RedirectToPage("/AdminManageItems");
+
 
             ProductCategory? category = await _productCategoryRepository.GetProductCategoryByIdAsync(Product.CategoryId);
             if (category == null) return Page();
@@ -65,7 +67,8 @@ namespace Servindustria.Pages
         }
 
         public async Task<IActionResult> OnPostAddTechnicalTableOrCatalogAsync(TechnicalTableOrCatalog? TechnicalTableOrCatalog = null, IFormFile? PdfFile = null) {
-            if (!ModelState.IsValid || TechnicalTableOrCatalog == null || PdfFile == null) return Page();
+            if (!User.IsInRole("Admin")) return RedirectToPage("/Authentication");
+            if (!ModelState.IsValid || TechnicalTableOrCatalog == null || PdfFile == null) return RedirectToPage("/AdminManageItems");
 
             await _technicalTableRepository.AddTechnicalTableOrCatalogAsync(TechnicalTableOrCatalog);
             var pdfPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/pdfs", "technicaltable_" + TechnicalTableOrCatalog.Id.ToString() + Path.GetExtension(PdfFile.FileName));
@@ -83,6 +86,7 @@ namespace Servindustria.Pages
         }
 
         public async Task<IActionResult> OnPostDeleteProductAsync(int id) {
+            if (!User.IsInRole("Admin")) return RedirectToPage("/Authentication");
             await _productRepository.DeleteProductAsync(id);
             
             var imgPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imgs", "product_" + id.ToString() + getProductImageExtension(id));
@@ -96,6 +100,7 @@ namespace Servindustria.Pages
         }
 
         public async Task<IActionResult> OnPostDeleteTechnicalTableOrCatalogAsync(int id) {
+            if (!User.IsInRole("Admin")) return RedirectToPage("/Authentication");
             await _technicalTableRepository.DeleteTechnicalTableOrCatalogAsync(id);
 
             var pdfPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/pdfs", "technicaltable_" + id.ToString() + ".pdf");
@@ -117,7 +122,8 @@ namespace Servindustria.Pages
         }
 
         public async Task<IActionResult> OnPostAddProductCategoryAsync(ProductCategory? ProductCategory = null) {
-            if (!ModelState.IsValid || ProductCategory == null) return Page();
+            if (!User.IsInRole("Admin")) return RedirectToPage("/Authentication");
+            if (!ModelState.IsValid || ProductCategory == null) return RedirectToPage("/AdminManageItems");
 
             await _productCategoryRepository.AddProductCategoryAsync(ProductCategory);
             TempData["SuccessMessage"] = "Categoria de produto adicionada com sucesso.";
@@ -125,6 +131,7 @@ namespace Servindustria.Pages
         }
 
         public async Task<IActionResult> OnPostDeleteProductCategoryAsync(int id) {
+            if (!User.IsInRole("Admin")) return RedirectToPage("/Authentication");
             bool result = await _productCategoryRepository.DeleteProductCategoryAsync(id);
             if (!result) {
                 TempData["ErrorMessage"] = "Não pode eliminar uma categoria de produto enquanto houver produtos associados a ela.";
