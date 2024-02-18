@@ -18,7 +18,7 @@ public class ProductsModel : PageModel {
     public IEnumerable<Product>? Products;
     public int TotalProducts { get; set; }
     public int CurrentPage { get; set; }
-    public int PageSize { get; set; } = 5;
+    public int PageSize { get; set; } = 6;
     
     [FromQuery]
     public string Search { get; set; } = string.Empty;
