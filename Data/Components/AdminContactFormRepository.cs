@@ -32,4 +32,8 @@ public class AdminContactFormRepository : IAdminContactFormRepository {
         
         return (await contactForms.ToListAsync(), totalCount);
     }
+
+    public async Task<int> GetTotalUnseenAdminContactFormsAsync() {
+        return await _context.ContactForms.CountAsync(cf => !cf.Seen);
+    }
 }

@@ -58,4 +58,9 @@ app.UseAuthorization();
 app.UseRouting();
 app.MapRazorPages();
 
+if (!Directory.Exists("wwwroot/pdfs"))
+{
+    Directory.CreateDirectory("wwwroot/pdfs");
+}
+
 app.Run();

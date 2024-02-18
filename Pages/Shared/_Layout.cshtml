@@ -42,10 +42,18 @@
                 </li>
 
                 @if (isAdmin) {
+                    @Html.AntiForgeryToken()
+                    <script src="~/js/admin.js" asp-append-version="true"></script>
                     <li class="@(currentPage.EndsWith("/admin/pedidosChamada") ? "currentPage" : "exit-trigger")">
+                        <div id="notificationCallRequests" class="notification">
+                            <img src="~/imgs/notification.png" alt="Notificação"/>
+                        </div>
                         <a asp-page="AdminCallRequests">Pedidos de Chamada</a>
                     </li>
                     <li class="@(currentPage.EndsWith("/admin/pedidosContacto") ? "currentPage" : "exit-trigger")">
+                        <div id="notificationContactForms" class="notification">
+                            <img src="~/imgs/notification.png" alt="Notificação"/>
+                        </div>
                         <a asp-page="AdminContactForms">Pedidos de Contacto</a>
                     </li>
                 <li class="@(currentPage.EndsWith("/admin/gerirItems") ? "currentPage" : "exit-trigger")">

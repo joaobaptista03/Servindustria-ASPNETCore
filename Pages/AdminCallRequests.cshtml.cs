@@ -89,4 +89,13 @@ public class AdminCallRequestsModel : PageModel {
 
         return RedirectToPage("/AdminCallRequests", new { UnseenAdminCallRequestsCurrentPage, SeenAdminCallRequestsCurrentPage });
     }
+
+    public async Task<IActionResult> OnPostNrCallRequests() {
+        if (User.Identity == null || !User.Identity.IsAuthenticated) return new JsonResult(new { Result = 0 });
+        if (!User.IsInRole("Admin")) return new JsonResult(new { Result = 0 });
+        
+        TotalUnseenAdminCallRequests = await _callRequestRepository.GetTotalUnseenAdminCallRequestsAsync();
+
+        return new JsonResult(new { Result = TotalUnseenAdminCallRequests});
+    }
 }

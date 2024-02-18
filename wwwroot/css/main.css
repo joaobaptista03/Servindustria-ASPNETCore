@@ -7,6 +7,7 @@ html, body {
     display: flex;
     flex-direction: column;
     margin: 0;
+    zoom: 90%;
 }
 
 main {
@@ -26,11 +27,12 @@ header ul /* MENU */ {
     list-style-type: none;
     justify-content: space-between;
     align-items: center;
-    padding-inline-start: 0;
+    padding-inline-start: 150px;
+    padding-inline-end: 150px;
 }
 
 header ul li {
-    flex: 1;
+    display: flex;
     text-align: center;
 }
 
@@ -76,6 +78,11 @@ header ul li a:hover /* HOVER OF EACH MENU OPTION */ {
     100% {
         translate: 0px 0px;
     }
+}
+
+.notification {
+    zoom: 0.05;
+    visibility: hidden;
 }
 
 /* ----------------------------------------- MOVABLE ICON ----------------------------------------- */

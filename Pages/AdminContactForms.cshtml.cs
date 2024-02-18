@@ -89,4 +89,13 @@ public class AdminContactFormsModel : PageModel {
 
         return RedirectToPage("/AdminContactForms", new { UnseenAdminContactFormsCurrentPage, SeenAdminContactFormsCurrentPage });
     }
+
+    public async Task<IActionResult> OnPostNrContactForms() {
+        if (User.Identity == null || !User.Identity.IsAuthenticated) return new JsonResult(new {Result = 0});
+        if (!User.IsInRole("Admin")) return new JsonResult(new {Result = 0});
+
+        TotalUnseenAdminContactForms = await _contactFormRepository.GetTotalUnseenAdminContactFormsAsync();
+
+        return new JsonResult(new {Result = TotalUnseenAdminContactForms});
+    }
 }

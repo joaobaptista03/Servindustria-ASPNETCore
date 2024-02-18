@@ -32,4 +32,8 @@ public class AdminCallRequestRepository : IAdminCallRequestRepository {
         
         return (await callRequests.ToListAsync(), totalCount);
     }
+
+    public async Task<int> GetTotalUnseenAdminCallRequestsAsync() {
+        return await _context.AdminCallRequests.CountAsync(cr => !cr.Seen);
+    }
 }
