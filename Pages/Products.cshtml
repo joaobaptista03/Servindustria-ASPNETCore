@@ -8,7 +8,8 @@
 
     <div class="SearchAndFilter">
         <form method="post" asp-page="Products" asp-page-handler="Search">
-            <input type="text" name="search" value="@Model.Search" placeholder="Procurar por Nome"/>
+            <input type="text" name="search" value="@Model.Search" placeholder="Procurar por Nome / Marca"/>
+            <input type="hidden" name="currentPage" value=1 />
             <input type="hidden" name="filter" value="@Model.Filter" />
             <input type="submit" value="Pesquisar" />
         </form>
@@ -26,6 +27,7 @@
                     }
                 }
             </select>
+            <input type="hidden" name="currentPage" value=1 />
             <input type="hidden" name="search" value="@Model.Search" />
             <input type="submit" value="Filtrar" />
         </form>
