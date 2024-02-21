@@ -17,7 +17,7 @@ public class ProductsModel : PageModel {
 
     public IEnumerable<Product>? Products;
     public int TotalProducts { get; set; }
-    public int CurrentPage { get; set; }
+    public int CurrentPage { get; set; } = 1;
     public int PageSize { get; set; } = 6;
     
     [FromQuery]
@@ -77,11 +77,11 @@ public class ProductsModel : PageModel {
     public IActionResult OnPostSearch(string search, int filter)
     {
         
-        return RedirectToPage("/Products", new { Search = search, Filter = filter });
+        return RedirectToPage("/Products", new { Search = search, Filter = filter , CurrentPage = 1});
     }
 
     public IActionResult OnPostFilter(int filter, string search) {
-        return RedirectToPage("/Products", new { Filter = filter, Search = search });
+        return RedirectToPage("/Products", new { Filter = filter, Search = search , CurrentPage = 1});
     }
 
     public string GetImagePathForProductId(int productId)
