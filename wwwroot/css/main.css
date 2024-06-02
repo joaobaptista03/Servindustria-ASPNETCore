@@ -41,7 +41,7 @@ header ul li a /* EACH MENU OPTION */ {
     color: white;
     transition: all 0.2s ease;
     font-family: Courier;
-    font-size: 16px;
+    font-size: 21px;
     display: inline-block;
     padding: 5px 10px;
 }
@@ -61,7 +61,7 @@ header ul li a:hover /* HOVER OF EACH MENU OPTION */ {
 }
 
 .companyName p {
-    font-size: 30px;
+    font-size: 40px;
     color: white;
     margin-bottom: 0;
     margin-top: 20px;
